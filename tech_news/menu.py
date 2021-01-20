@@ -1,5 +1,5 @@
 def collector_menu():
-    """Seu código deve vir aqui"""
+    print("valew cassio")
 
 
 def analyzer_menu():

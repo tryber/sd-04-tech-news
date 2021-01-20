@@ -1,16 +1,20 @@
 import requests
-import time
+from time import sleep
+from parsel import Selector
 
 
 def fetch_content(url, timeout=3, delay=0.5):
-    time.sleep(delay)
-    response = requests.get(url)
-    if response.status_code != 200:
-        return print('')
-    else:
-        print(response.status_code)  # código de status
-        print(response.text)  # conteúdo recebido
+    try:
+        sleep(delay)
+        response = requests.get(url, timeout=3)
+        if response.status_code != 200:
+            return ""
+        return response.text
+    except requests.ReadTimeout:
+        return ""
 
 
 def scrape(fetcher, pages=1):
-    """Seu código deve vir aqui"""
+    selector = Selector(text = fetch_content("https://www.tecmundo.com.br/novidades"))
+    url = selector.css("figure.tec--card__thumb a::attr(href)").getall()
+    print(url)

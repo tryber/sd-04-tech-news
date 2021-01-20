@@ -1,17 +1,16 @@
 import requests
-# import time
 from time import sleep
 
 
 def fetch_content(url, timeout=3, delay=0.5):
     try:
         response = requests.get(url, timeout=timeout)
-        # time.sleep(delay)
         sleep(delay)
-        response.raise_for_status()
+        print(response.status_code)
     except requests.ReadTimeout:
         return ""
-    except requests.HTTPError:
+    if response.status_code != 200:
+        print("inside code != 200")
         return ""
     else:
         return response.text

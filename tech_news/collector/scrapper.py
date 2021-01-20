@@ -15,6 +15,6 @@ def fetch_content(url, timeout=3, delay=0.5):
 
 
 def scrape(fetcher, pages=1):
-    selector = Selector(text = fetch_content("https://www.tecmundo.com.br/novidades"))
-    url = selector.css("figure.tec--card__thumb a::attr(href)").getall()
-    print(url)
+    # selector = Selector(text = fetch_content("https://www.tecmundo.com.br/novidades"))
+    # url = selector.css("figure.tec--card__thumb a::attr(href)").getall()
+    # print(url)

@@ -1,5 +1,5 @@
 def collector_menu():
-    """Seu código deve vir aqui"""
+    """Seu codigo deve vir aqui"""
 
 
 def analyzer_menu():

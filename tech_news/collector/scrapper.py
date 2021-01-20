@@ -19,3 +19,4 @@ def scrape(fetcher, pages=1):
     # ("https://www.tecmundo.com.br/novidades"))
     # url = selector.css("figure.tec--card__thumb a::attr(href)").getall()
     # print(url)
+    

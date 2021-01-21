@@ -35,6 +35,7 @@ def test_validar_scrape_default_retorna_a_primeira_pagina():
         else:
             file_name = "tests/test_collector/notice.html"
         with open(file_name) as file:
+            print('fetcher :', fetcher)
             return file.read()
 
     assert len(scrape(fetcher=fetcher)) == 20

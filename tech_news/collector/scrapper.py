@@ -3,11 +3,15 @@ import time
 
 
 def fetch_content(url, timeout=3, delay=0.5):
-    time.sleep(delay)
-    response = requests.get(url, timeout=timeout)
-    if response.status_code == 200:
+    try:
+        response = requests.get(url, timeout=timeout)
+        response.raise_for_status()
+    except (requests.ReadTimeout, requests.HTTPError):
+        return ""
+    else:
         return response.text
-    return ""
+    finally:
+        time.sleep(delay)
 
 
 def scrape(fetcher, pages=1):

@@ -1,6 +1,7 @@
 import requests
 from time import sleep
-from parsel import Selector
+
+# from parsel import Selector
 
 
 def fetch_content(url, timeout=3, delay=0.5):
@@ -14,5 +15,4 @@ def fetch_content(url, timeout=3, delay=0.5):
         return response.text
 
 
-def scrape(fetcher, pages=1):
-    
+# def scrape(fetcher, pages=1):

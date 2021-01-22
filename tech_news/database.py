@@ -43,3 +43,16 @@ def get_top5():
             ]
         )
     )
+
+
+def get_top_categories():
+    return list(
+        db.news.aggregate(
+            [
+                {"$unwind": "$categories"},
+                {"$group": {"_id": "$categories", "total": {"$sum": 1}}},
+                {"$sort": {"total": -1, "_id": 1}},
+                {"$limit": 5}
+            ]
+        )
+    )

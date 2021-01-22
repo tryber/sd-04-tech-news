@@ -1,4 +1,4 @@
-        noticie = {
+    noticie = {
             "url": url,
             "title": title,
             "timestamp": timestamp,

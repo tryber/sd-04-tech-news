@@ -19,8 +19,17 @@ def fetch_content(url, timeout=3, delay=0.5):
 def scrape(fetcher, pages=1):
     summary = ""
     sources = []
-    try:
-        url = "https://www.tecmundo.com.br/produto/209717-xiaomi-lanca-robo-varre-passa-pano-r-3-679-99-brasil.htm"
+
+    response_principal = requests.get("https://www.tecmundo.com.br/novidades")
+
+    selector_principal = Selector(text=response_principal.text)
+
+    list_noticies_URL = selector_principal.css(
+        ".tec--card__title a::attr(href)"
+    ).getall()
+
+    for i in list_noticies_URL:
+        url = i
         response = requests.get(url)
         selector = Selector(text=response.text)
 
@@ -29,16 +38,24 @@ def scrape(fetcher, pages=1):
             ".tec--timestamp__item time::attr(datetime)"
         ).get()
         writer = selector.css(".tec--author__info__link::text").get()
+        if writer is None:
+            writer = selector.css(
+                ".z--items-center .tec--timestamp  .z--font-bold a::text"
+            ).get()
+
         shares_count = (
             selector.css(".tec--toolbar__item::text")
             .get()
             .replace(" Compartilharam", "")
         )
+        if shares_count is None:
+            shares_count = 0
+
         comments_count = selector.css(
             ".tec--toolbar__item button::attr(data-count)"
         ).get()
 
-        summary_list = selector.css(".tec--article__body p *::text").getall()
+        summary_list = selector.css(".tec--article__body *::text").getall()
         for i in summary_list:
             summary += i
 
@@ -48,6 +65,7 @@ def scrape(fetcher, pages=1):
         for i in sources_list:
             if i != " ":
                 sources.append(i)
+        noticies = []
         noticie = {
             "url": url,
             "title": title,
@@ -59,11 +77,6 @@ def scrape(fetcher, pages=1):
             "sources": sources,
             "categories": categories,
         }
-
-        print(noticie)
-
-    finally:
-        return ""
-
-
-scrape("a")
+        noticies.append(noticie)
+        # print(noticie)
+        return noticies

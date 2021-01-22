@@ -1,7 +1,6 @@
 import requests
 from time import sleep
-
-import parsel
+from parsel import Selector
 
 
 def fetch_content(url, timeout=3, delay=0.5):
@@ -16,33 +15,33 @@ def fetch_content(url, timeout=3, delay=0.5):
 
 
 def scrape(fetcher, pages=1):
-    selector = parsel.Selector(fetcher)
-    news = []
-    for notice in selector.css("div.tec--list__item"):
-        url = notice.css("a.tec--card__title__link::attr(href)").get()
-        title = notice.css("h3.tec--card__title *::text").get()
-        # print('oieeeee', news)
-        news.append(
-            {
-                "url": url,
-                "title": title.strip(),
-                # "timestamp": timestamp,
+    # selector = Selector(fetcher)
+    tech_news = []
+    for page in range(pages):
+        URL = f"https://www.tecmundo.com.br/novidades?page={page}"
+        site = Selector(text=fetcher(URL))
+        news = site.css("h3 a.tec--card__title__link::attr(href)").getall()
+        for notice in news:
+            result = Selector(fetcher(notice))
+            title = result.css("h1#js-article-title::text").get()
+            timestamp = result.css("time#js-article-date::attr(datetime)").get()
+            writer = result.css("a.tec--author__info__link::text").get()
+            shares_count = result.css("div.tec--toolbar__item::text").re_first("\\d")
+            comments_count = result.css("#js-comments-btn::attr(datacount").getall()
+            summary = result.css("div.tec--article__body p *::text").get()
+            sources = result.css("div.z--mb-16 .tec--badge::text").getall()
+            categories = result.css("div#js-categories .tec--badge--primary::text").getall()
+            tech_news.append({
+                "url": notice,
+                "title": title,
+                "timestamp": timestamp,
+                "writer": writer,
+                "shares_count": shares_count,
+                "comments_count": comments_count,
+                "summary": summary,
+                "sources": sources,
+                "categories": categories,
             }
-        )
-        # pageCode = parsel.Selector(url)
-        # for one_notice in pageCode.css("div"):
-        #     title = one_notice.css("h1.js-article-title::text")
-        #     print('YESYESYES', one_notice.css("div::text").getall())
-        #     # timestamp = one_notice.css("time::attr(datetime)").get()
-        # print('aqui viria o q escolhi do pageCode', pageCode)
 
-    return news
+    return tech_news
 
-
-teste = fetch_content("https://www.tecmundo.com.br/novidades")
-
-# print(teste)
-
-respo = scrape(teste)
-
-print(respo)

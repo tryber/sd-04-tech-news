@@ -1,4 +1,4 @@
-from ..database import find_news
+from tech_news.database import find_news
 import csv
 
 # import os, sys, inspect

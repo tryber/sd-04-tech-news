@@ -6,7 +6,7 @@ def csv_importer(filepath):
         raise ValueError("Formato invalido")
 
     try:
-        with open(filepath) as file:
+        with open(filepath, encoding='utf-8') as file:
             needed_header = [
                 "url",
                 "title",

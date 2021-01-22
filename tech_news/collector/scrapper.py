@@ -21,21 +21,25 @@ def scrape(fetcher, pages=1):
     for notice in selector.css("div.tec--list__item"):
         url = notice.css("a.tec--card__title__link::attr(href)").get()
         title = notice.css("h3.tec--card__title *::text").get()
-        pageCode = parsel.Selector(url)
-        timestamp = notice.css("time::attr(datetime)").get()
-        # for one_notice in pageCode:
+        # print('oieeeee', news)
         news.append(
             {
                 "url": url,
                 "title": title.strip(),
-                "timestamp": timestamp,
+                # "timestamp": timestamp,
             }
         )
+        # pageCode = parsel.Selector(url)
+        # for one_notice in pageCode.css("div"):
+        #     title = one_notice.css("h1.js-article-title::text")
+        #     print('YESYESYES', one_notice.css("div::text").getall())
+        #     # timestamp = one_notice.css("time::attr(datetime)").get()
+        # print('aqui viria o q escolhi do pageCode', pageCode)
 
-    return len(news)
+    return news
 
 
-teste = fetch_content("https://www.tecmundo.com.br/produto/209787-microsoft-registra-tela-ajusta-angulo-visao-automaticamente.htm")
+teste = fetch_content("https://www.tecmundo.com.br/novidades")
 
 # print(teste)
 

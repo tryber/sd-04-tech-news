@@ -53,7 +53,7 @@ def scrape(fetcher, pages=1):
             pages_details.append(page_details)
         next_page_url = selector.css(".tec--btn::attr(href)").get()
         page_url = fetch_content(str(next_page_url))
-        print(pages_details)
+    return page_details
 
 
-scrape(fetch_content("https://www.tecmundo.com.br/novidades"))
+# scrape(fetch_content("https://www.tecmundo.com.br/novidades"))

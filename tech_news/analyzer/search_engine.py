@@ -5,6 +5,7 @@ from tech_news.database import search_news
 import re
 import datetime
 
+
 def find_news_func(param, result):
     regex = re.compile(param, re.IGNORECASE)
     results_list = []

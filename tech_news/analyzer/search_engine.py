@@ -1,5 +1,5 @@
-# https://stackoverflow.com/questions/500864/case-insensitive-regular-expression-without-re-compile
-# https://stackoverflow.com/questions/9978534/match-dates-using-python-regular-expressions
+# stackoverflow.com/questions/500864/case-insensitive-regular-expression-without-re-compile
+# stackoverflow.com/questions/9978534/match-dates-using-python-regular-expressions
 
 from tech_news.database import search_news
 import re

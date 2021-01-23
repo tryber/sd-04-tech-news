@@ -28,7 +28,9 @@ def scrape(fetcher, pages=1):
             url = item.css("h3 a::attr(href)").get()
             one_news_content = fetcher(url)
             one_news_content_selector = Selector(one_news_content)
-            title = one_news_content_selector.css("#js-article-title::text").get()
+            title = one_news_content_selector.css(
+                "#js-article-title::text"
+            ).get()
             writer = one_news_content_selector.css(
                 ".tec--author__info__link::text"
             ).get()

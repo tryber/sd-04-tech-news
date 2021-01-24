@@ -54,4 +54,3 @@ def scrape(fetcher, pages=1):
             selector = Selector(fetcher(url))
             news_object.append(scrape_new_object(url, selector))
     return news_object
-

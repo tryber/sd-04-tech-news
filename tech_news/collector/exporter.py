@@ -13,6 +13,7 @@ FIELD_NAME = [
     "categories",
 ]
 
+
 def treating_content_list():
     content = find_news()
     for field in content:
@@ -32,4 +33,3 @@ def csv_exporter(filepath):
 
         writer.writeheader()
         writer.writerows(content)
-

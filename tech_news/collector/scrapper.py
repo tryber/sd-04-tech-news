@@ -21,7 +21,6 @@ def scrape(fetcher=fetch_content, pages=1):
     news_return = []
 
     for page in range(1, pages + 1):
-        print(page)
         response = fetcher(
             "https://www.tecmundo.com.br/novidades?page=" + str(page)
         )
@@ -30,77 +29,97 @@ def scrape(fetcher=fetch_content, pages=1):
         urls = selector.css(".tec--card__title__link::attr(href)").getall()
 
         for url in urls:
-
-            fetch = fetcher(url)
-            selector = Selector(text=fetch)
-
-            title = selector.css("#js-article-title::text").get()
-
-            timestamp = selector.css("#js-article-date::attr(datetime)").get()
-
-            writer = (
-                selector.css(".tec--author__info__link::text").get().strip()
-                if selector.css(".tec--author__info__link::text").get() != None
-                else "None"
-            )
-
-            shares_count = (
-                int(
-                    selector.css(".tec--toolbar__item::text")
-                    .get()
-                    .strip()
-                    .split()[0],
-                    base=10,
-                )
-                if selector.css(".tec--toolbar__item::text").get() != None
-                else "None"
-            )
-
-            comments_count = (
-                int(
-                    selector.css(".tec--toolbar__item > button::text")
-                    .getall()[1]
-                    .strip()
-                    .split()[0],
-                    base=10,
-                )
-                if selector.css(".tec--toolbar__item > button::text").getall()
-                != None
-                else "None"
-            )
-
-            summary = "".join(
-                selector.css(
-                    ".tec--article__body p:first-of-type *::text"
-                ).getall()
-            )
-
-            sources = selector.css(".tec--badge::text").getall()
-
-            categories = selector.css("#js-categories a::text").getall()
-
-            for index, category in enumerate(categories):
-                categories[index] = category.strip()
-
-            for index, source in enumerate(sources):
-                sources[index] = source.strip()
-
-            sources = [
-                source for source in sources if source not in categories
-            ]
-
-            news_return.append(
-                {
-                    "url": url,
-                    "title": title,
-                    "timestamp": timestamp,
-                    "writer": writer,
-                    "shares_count": shares_count,
-                    "comments_count": comments_count,
-                    "summary": summary,
-                    "sources": sources,
-                    "categories": categories,
-                }
-            )
+            news_return.append(scrape_single_news(url))
 
     return news_return
+
+
+def get_title(selector):
+    return selector.css("#js-article-title::text").get()
+
+
+def get_timestamp(selector):
+    return selector.css("#js-article-date::attr(datetime)").get()
+
+
+def get_writer(selector):
+    writer = selector.css(".tec--author__info__link::text").get()
+    if writer is not None:
+        writer = writer.strip()
+
+    return writer
+
+
+def get_shares_count(selector):
+    shares_count = selector.css(".tec--toolbar__item::text")
+
+    if shares_count is not None:
+        shares_count = int(
+            shares_count.get().strip().split()[0],
+            base=10,
+        )
+    return shares_count
+
+
+def get_comments_count(selector):
+    comments_count = selector.css(".tec--toolbar__item > button::text").get(
+        all
+    )
+
+    if comments_count is not None:
+        comments_count = int(
+            comments_count.getall()[1].strip().split()[0],
+            base=10,
+        )
+
+
+def get_summary(selector):
+    return "".join(
+        selector.css(".tec--article__body p:first-of-type *::text").getall()
+    )
+
+
+def get_sources(selector):
+    sources = selector.css(".tec--badge::text").getall()
+
+    for index, source in enumerate(sources):
+        sources[index] = source.strip()
+
+    return sources
+
+
+def get_categories(selector):
+    categories = selector.css("#js-categories a::text").getall()
+
+    for index, category in enumerate(categories):
+        categories[index] = category.strip()
+
+    return categories
+
+
+def scrape_single_news(url, fetcher=fetch_content):
+    fetch = fetcher(url)
+    selector = Selector(text=fetch)
+
+    title = get_title(selector)
+    timestamp = get_timestamp(selector)
+    writer = get_writer(selector)
+    shares_count = get_shares_count(selector)
+    comments_count = get_comments_count(selector)
+    summary = get_summary(selector)
+    categories = get_categories(selector)
+    sources = [
+        source for source in get_sources(selector) if source not in categories
+    ]
+
+    return {
+        "url": url,
+        "title": title,
+        "timestamp": timestamp,
+        "writer": writer,
+        "shares_count": shares_count,
+        "comments_count": comments_count,
+        "summary": summary,
+        "sources": sources,
+        "categories": categories,
+    }

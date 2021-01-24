@@ -13,7 +13,6 @@ def csv_importer(filepath):
         file_output = []
         temp_list = {}
         for index, item in enumerate(header):
-            # temp_list = {item: data[0][index]}
             temp_list[item] = data[0][index]
         file_output.append(temp_list)
         print("Tentativa de abrir arquivo", file_output)

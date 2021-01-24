@@ -21,8 +21,10 @@ def scrape(fetcher, pages=1):
     base_url = "https://www.tecmundo.com.br/novidades"
     page = 1
     all_news = []
+    url_page = "?page="
+
     while page <= pages:
-        selector = Selector(fetcher(base_url))
+        selector = Selector(fetcher(base_url + url_page + str(page)))
         items = selector.css(".tec--list__item")
         for index, item in enumerate(items):
             url = item.css("h3 a::attr(href)").get()

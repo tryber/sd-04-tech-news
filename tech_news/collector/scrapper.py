@@ -31,7 +31,7 @@ def scrape(fetcher, pages=1):
         urls = selector.css(".tec--card__title__link::attr(href)").getall()
 
         for url in urls:
-            news_return.append(scrape_single_news(url))
+            news_return.append(scrape_single_news(url, fetcher))
 
     return news_return
 
@@ -101,7 +101,7 @@ def get_categories(selector):
     return categories
 
 
-def scrape_single_news(url, fetcher=fetch_content):
+def scrape_single_news(url, fetcher):
     fetch = fetcher(url)
     selector = Selector(text=fetch)
     title = get_title(selector)

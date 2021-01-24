@@ -53,7 +53,7 @@ def get_writer(selector):
 def get_shares_count(selector):
     shares_count = selector.css(".tec--toolbar__item::text")
 
-    if shares_count is not None:
+    if shares_count != []:
         shares_count = int(
             shares_count.get().strip().split()[0],
             base=10,
@@ -62,15 +62,17 @@ def get_shares_count(selector):
 
 
 def get_comments_count(selector):
-    comments_count = selector.css(".tec--toolbar__item > button::text").get(
-        all
-    )
+    comments_count = selector.css(
+        ".tec--toolbar__item > button::text"
+    ).getall()
 
     if comments_count is not None:
         comments_count = int(
-            comments_count.getall()[1].strip().split()[0],
+            comments_count[1].strip().split()[0],
             base=10,
         )
+
+    return comments_count
 
 
 def get_summary(selector):

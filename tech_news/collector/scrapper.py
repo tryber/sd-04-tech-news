@@ -4,12 +4,12 @@ from parsel import Selector
 
 
 def fetch_content(url, timeout=3, delay=0.5):
+    time.sleep(delay)
 
     try:
         response = requests.get(url, timeout=timeout)
 
     except requests.ReadTimeout:
-        time.sleep(delay)
         response = requests.get(url)
 
     finally:

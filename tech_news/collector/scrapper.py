@@ -18,7 +18,7 @@ def fetch_content(url, timeout=3, delay=0.5):
         time.sleep(delay)
 
 
-def scrape(fetcher=fetch_content, pages=1):
+def scrape(fetcher, pages=1):
 
     news_return = []
 

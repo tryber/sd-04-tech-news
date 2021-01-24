@@ -6,15 +6,16 @@ from parsel import Selector
 def fetch_content(url, timeout=3, delay=0.5):
 
     try:
-        time.sleep(delay)
         response = requests.get(url, timeout=timeout)
 
-    except requests.ReadTimeout:
-        time.sleep(delay)
+    except (requests.HTTPError, requests.ReadTimeout):
         response = requests.get(url)
+        return ""
+    else:
+        return response.text
 
     finally:
-        return response.text if response.status_code == 200 else ""
+        time.sleep(delay)
 
 
 def scrape(fetcher=fetch_content, pages=1):

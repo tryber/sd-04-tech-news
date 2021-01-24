@@ -3,13 +3,21 @@ from tech_news import database
 
 
 def search_by_title(title):
-    """Seu código deve vir aqui"""
-    news = database.search_news(title)
-    print("news found: ", news)
+    output_list = []
+    news = database.search_news({"title": {"$regex": title}})
+    if len(news) == 1:
+        output_list.append((news[0]["title"], news[0]["url"]))
+
+    return output_list
 
 
 def search_by_date(date):
-    """Seu código deve vir aqui"""
+    output_list = []
+    news = database.search_news({"timestamp": {"$regex": date}})
+    if len(news) == 1:
+        output_list.append((news[0]["timestamp"], news[0]["url"]))
+
+    return output_list
 
 
 def search_by_source(source):

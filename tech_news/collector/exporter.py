@@ -2,6 +2,16 @@ from tech_news import database
 import csv
 
 
+def list_to_string(news_item):
+    if type(news_item) == list:
+        print("inside if")
+        my_list = news_item
+        my_string = ",".join(my_list)
+        return my_string
+    else:
+        return news_item
+
+
 def csv_exporter(filepath):
     if not filepath.endswith(".csv"):
         raise ValueError("Formato invalido")
@@ -25,13 +35,7 @@ def csv_exporter(filepath):
             writer.writerow(headers)
             row = []
             for index, item in enumerate(headers):
-                if type(news[0][item]) == list:
-                    print("inside if")
-                    my_list = news[0][item]
-                    my_string = ','.join(my_list)
-                    row.append(my_string)
-                else:
-                    row.append(news[0][item])
+                row.append(list_to_string(news[0][item]))
             writer.writerow(row)
     except:
         print("cvs export went wrong")

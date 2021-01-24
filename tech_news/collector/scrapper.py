@@ -4,12 +4,13 @@ from parsel import Selector
 
 
 def fetch_content(url, timeout=3, delay=0.5):
-    time.sleep(delay)
 
     try:
+        time.sleep(delay)
         response = requests.get(url, timeout=timeout)
 
     except requests.ReadTimeout:
+        time.sleep(delay)
         response = requests.get(url)
 
     finally:
@@ -102,7 +103,6 @@ def get_categories(selector):
 def scrape_single_news(url, fetcher=fetch_content):
     fetch = fetcher(url)
     selector = Selector(text=fetch)
-
     title = get_title(selector)
     timestamp = get_timestamp(selector)
     writer = get_writer(selector)

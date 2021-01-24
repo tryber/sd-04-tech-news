@@ -26,4 +26,33 @@ def find_news():
 
 
 def search_news(query):
-    return list(db.news.find(query))
+    return list(db.news.find(query).collation({"locale": "en", "strength": 1}))
+
+
+def get_top5():
+    return list(
+        db.news.aggregate(
+            [
+                {
+                    "$addFields": {
+                        "sum": {"$add": ["$shares_count", "$comments_count"]}
+                    }
+                },
+                {"$sort": {"sum": -1, "title": 1}},
+                {"$limit": 5},
+            ]
+        )
+    )
+
+
+def get_top_categories():
+    return list(
+        db.news.aggregate(
+            [
+                {"$unwind": "$categories"},
+                {"$group": {"_id": "$categories", "total": {"$sum": 1}}},
+                {"$sort": {"total": -1, "_id": 1}},
+                {"$limit": 5},
+            ]
+        )
+    )

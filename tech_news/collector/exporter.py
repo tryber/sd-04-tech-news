@@ -37,7 +37,7 @@ def csv_exporter(filepath):
             for index, item in enumerate(headers):
                 row.append(list_to_string(news[0][item]))
             writer.writerow(row)
-    except:
+    except IOError:
         print("cvs export went wrong")
 
     else:

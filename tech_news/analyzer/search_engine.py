@@ -8,7 +8,7 @@ def format_tuples(news_data):
     search_for_news = []
     for new in news_data:
         search_for_news.append((new["title"], new["url"]))
-        return search_for_news
+    return search_for_news
 
 
 def search_by_title(title):

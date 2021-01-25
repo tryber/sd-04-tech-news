@@ -32,7 +32,9 @@ def search_by_source(source):
 
 def search_by_category(category):
     search_category = []
-    category = search_news({"categories": {"$regex": category, "$options": "i"}})
+    category = search_news(
+        {"categories": {"$regex": category, "$options": "i"}}
+    )
     if len(category) == 1:
         search_category.append((category[0]["title"], category[0]["url"]))
     return search_category

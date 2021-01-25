@@ -18,6 +18,7 @@ def fetch_content(url, timeout=3, delay=0.5):
 
 def scrape(fetcher, pages=1):
     BASE_URL = "https://www.tecmundo.com.br/novidades?page="
+    noticies = []
 
     for page in range(1, pages + 1):
         selector_principal = Selector(fetcher(f"{BASE_URL}{page}"))
@@ -44,8 +45,6 @@ def scrape(fetcher, pages=1):
                     .get()
                     .replace(" Compartilharam", "")
                 )
-
-            noticies = []
 
             noticies.append(
                 {

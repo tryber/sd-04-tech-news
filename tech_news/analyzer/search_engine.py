@@ -17,7 +17,14 @@ def search_by_date(date):
 
 
 def search_by_source(source):
-    """Seu código deve vir aqui"""
+    query = {"sources": {"$elemMatch": {"$regex": source, "$options": "i"}}}
+    data = search_news(query)
+    if not len(data):
+        return []
+    news_list = []
+    for obj in data:
+        news_list.append((obj["title"], obj["url"]))
+    return news_list
 
 
 def search_by_category(category):

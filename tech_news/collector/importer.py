@@ -1,4 +1,3 @@
-from tech_news.database import create_news
 import csv
 
 
@@ -27,7 +26,7 @@ def csv_importer(filepath):
             imp_list = [
                 {header[i]: info[i] for i in range(len(info))} for info in data
             ]
-            
+
             return imp_list
     except FileNotFoundError:
         raise ValueError(f"Arquivo {filepath} não encontrado")

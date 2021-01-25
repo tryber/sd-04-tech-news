@@ -28,4 +28,13 @@ def search_by_source(source):
 
 
 def search_by_category(category):
-    """Seu código deve vir aqui"""
+    query = {
+        "categories": {"$elemMatch": {"$regex": category, "$options": "i"}}
+    }
+    data = search_news(query)
+    if not len(data):
+        return []
+    news_list = []
+    for obj in data:
+        news_list.append((obj["title"], obj["url"]))
+    return news_list

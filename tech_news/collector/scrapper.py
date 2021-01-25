@@ -16,7 +16,7 @@ def fetch_content(url, timeout=3, delay=0.5):
     '''
     response = requests.get(url, timeout=timeout)
     if response.status_code != 200:
-        return ''
+        return ""
     time.sleep(delay)
     return response.text
     '''

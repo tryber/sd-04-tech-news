@@ -30,7 +30,11 @@ def collector_option(opt_input):
 
 def collector_menu():
     print(
-        "Selecione uma das opções a seguir:\n 1 - Importar notícias a partir de um arquivo CSV;\n 2 - Exportar notícias para CSV;\n 3 - Raspar notícias online;\n 4 - Sair."
+        """Selecione uma das opções a seguir:
+ 1 - Importar notícias a partir de um arquivo CSV;
+ 2 - Exportar notícias para CSV;
+ 3 - Raspar notícias online;
+ 4 - Sair."""
     )
     try:
         opt_input = int(input())
@@ -73,7 +77,14 @@ def analyzer_option(opt_input):
 def analyzer_menu():
     # isso ta horrivel meu amigo quanto if ;--; vou refatorar não, sorry
     print(
-        "Selecione uma das opções a seguir:\n 1 - Buscar notícias por título;\n 2 - Buscar notícias por data;\n 3 - Buscar notícias por fonte;\n 4 - Buscar notícias por categoria;\n 5 - Listar top 5 notícias;\n 6 - Listar top 5 categorias;\n 7 - Sair."
+        """Selecione uma das opções a seguir:
+ 1 - Buscar notícias por título;
+ 2 - Buscar notícias por data;
+ 3 - Buscar notícias por fonte;
+ 4 - Buscar notícias por categoria;
+ 5 - Listar top 5 notícias;
+ 6 - Listar top 5 categorias;
+ 7 - Sair."""
     )
     try:
         opt_input = int(input())

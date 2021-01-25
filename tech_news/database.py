@@ -11,7 +11,6 @@ db = client.tech_news
 def create_news(data):
     db.news.insert_many(data)
 
-# teste
 
 def insert_or_update(notice):
     return (

@@ -23,11 +23,10 @@ def scrape(fetcher, pages=1):
     for page in range(1, pages + 1):
         selector_principal = Selector(fetcher(f"{BASE_URL}{page}"))
         list_noticies_URL = selector_principal.css(
-            ".tec--card__title a::attr(href)"
+            ".tec--list__item .tec--card__title__link::attr(href)"
         ).getall()
 
-        for i in list_noticies_URL:
-            url = i
+        for url in list_noticies_URL:
             selector = Selector(fetcher(url))
 
             writer = selector.css(".tec--author__info__link::text").get()
@@ -65,10 +64,12 @@ def scrape(fetcher, pages=1):
                     "summary": selector.css(
                         ".tec--article__body *::text"
                     ).get(),
-                    "sources": selector.css(".z--mb-16 div *::text").getall(),
+                    "sources": selector.css(
+                        "div.z--mb-16 .tec--badge::text"
+                    ).getall(),
                     "categories": selector.css(
                         "#js-categories .tec--badge::text"
                     ).getall(),
                 }
             )
-            return noticies
+    return noticies

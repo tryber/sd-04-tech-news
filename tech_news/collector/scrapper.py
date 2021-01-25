@@ -12,7 +12,7 @@ def fetch_content(url, timeout=3, delay=0.5):
         response = requests.get(url, timeout=timeout)
         response.raise_for_status()
     except (requests.HTTPError, requests.ReadTimeout):
-        return ''
+        return ""
     else:
         return response.text
     finally:
@@ -39,15 +39,17 @@ def scrape(fetcher=fetch_content, pages=1):
         sources = selector.css(".z--mb-16.z--px-16 a::text").getall()
         categories = selector.css("#js-categories a::text").getall()
 
-        news.append({
-            "url": link,
-            "title": title,
-            "timestamp": timestamp,
-            "writer": writer,
-            "shares_count": int(shares.split()[0]),
-            "comments_count": int(comments),
-            "summary": summary,
-            "sources": list(filter(None, sources)),
-            "categories": list(filter(None, categories)),
-        })
+        news.append(
+            {
+                "url": link,
+                "title": title,
+                "timestamp": timestamp,
+                "writer": writer,
+                "shares_count": int(shares.split()[0]),
+                "comments_count": int(comments),
+                "summary": summary,
+                "sources": list(filter(None, sources)),
+                "categories": list(filter(None, categories)),
+            }
+        )
     return news

@@ -1,6 +1,6 @@
 from parsel import Selector
-import requests
 from time import sleep
+import requests
 
 
 def fetch_content(url, timeout=3, delay=0.5):
@@ -62,7 +62,6 @@ def scrape(fetcher, pages=1):
         scrape["categories"] = selector.css(
             "a.tec--badge--primary::text"
         ).getall()
-        print(scrape)
 
     return scrape_list
 

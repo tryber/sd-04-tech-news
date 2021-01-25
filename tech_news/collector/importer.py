@@ -1,3 +1,4 @@
+from tech_news.database import create_news
 import csv
 
 
@@ -6,7 +7,7 @@ def csv_importer(filepath):
         raise ValueError("Formato invalido")
 
     try:
-        with open(filepath, encoding='utf-8') as file:
+        with open(filepath, encoding="utf-8") as file:
             needed_header = [
                 "url",
                 "title",
@@ -23,8 +24,10 @@ def csv_importer(filepath):
             if header != needed_header:
                 raise ValueError("Formato invalido")
 
-            return [
+            imp_list = [
                 {header[i]: info[i] for i in range(len(info))} for info in data
             ]
+            
+            return imp_list
     except FileNotFoundError:
         raise ValueError(f"Arquivo {filepath} não encontrado")

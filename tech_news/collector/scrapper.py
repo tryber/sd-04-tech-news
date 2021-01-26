@@ -29,35 +29,35 @@ def scrape(fetcher, pages=1):
         ).getall()
 
         for url in articles_url_list:
-            second_selector = Selector(fetcher(url))
+            snd_selector = Selector(fetcher(url))
 
             tech_news_list.append(
                 {
                     "url": url,
-                    "title": second_selector.css(
+                    "title": snd_selector.css(
                         ".tec--article__header__title::text"
                     ).get(),
-                    "timestamp": second_selector.css(
+                    "timestamp": snd_selector.css(
                         ".tec--timestamp__item::attr(datetime)"
                     ).get(),
-                    "writer": second_selector.css(
+                    "writer": snd_selector.css(
                         ".z--items-center .tec--timestamp .z--font-bold a::text"
                     ).get(),
                     "shares_count": int(
-                        second_selector.css(".tec--toolbar__item::text").get()
+                        snd_selector.css(".tec--toolbar__item::text").get()
                     ),
                     "comments_count": int(
-                        second_selector.css(
+                        snd_selector.css(
                             ".tec--toolbar__item button::attr(data-count)"
                         ).get()
                     ),
-                    "summary": second_selector.css(
+                    "summary": snd_selector.css(
                         ".tec--article__body *::text"
                     ).get(),
-                    "sources": second_selector.css(
+                    "sources": snd_selector.css(
                         "div.z--mb-16 .tec--badge::text"
                     ).getall(),
-                    "categories": second_selector.css(
+                    "categories": snd_selector.css(
                         "#js-categories .tec--badge::text"
                     ).getall(),
                 }

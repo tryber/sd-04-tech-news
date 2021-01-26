@@ -30,9 +30,6 @@ def scrape(fetcher, pages=1):
 
         for url in articles_url_list:
             second_selector = Selector(fetcher(url))
-            title_list = second_selector.css(
-                ".tec--article__header__title::text"
-            ).get()
 
             tech_news_list.append(
                 {

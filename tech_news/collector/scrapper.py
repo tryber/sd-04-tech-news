@@ -6,9 +6,9 @@ from parsel import Selector
 def fetch_content(url, timeout=3, delay=0.5):
     try:
         response = requests.get(url, timeout=timeout)
-        sleep(delay)
         response.raise_for_status()
     except (requests.ReadTimeout, requests.HTTPError):
+        sleep(delay)
         return ""
     else:
         sleep(delay)
@@ -17,43 +17,63 @@ def fetch_content(url, timeout=3, delay=0.5):
 
 def scrape(fetcher, pages=1):
     pages_details = []
-    page_url = fetcher
-    for _ in range(pages):
-        selector = Selector(text=page_url)
-        for news in selector.css(".tec--card__title"):
+    base_url = "https://www.tecmundo.com.br/novidades?page="
+    for page_num in range(1, pages + 1):
+        selector = Selector(text=fetcher(base_url + str(page_num)))
+        for news in selector.css("h3.tec--card__title"):
+            # print(news.css("a::attr(href)").get())
             url = news.css("a::attr(href)").get()
-            details_selector = Selector(text=fetch_content(url))
+            details_selector = Selector(text=fetcher(url))
+            title = str(
+                details_selector.css(
+                    "h1.tec--article__header__title::text"
+                ).get()
+            )
+            timestamp = str(
+                details_selector.css("#js-article-date::attr(datetime)").get()
+            )
+            writer = str(
+                details_selector.css(".tec--author__info__link::text").get()
+            )
+            shares_count = str(
+                details_selector.css(".tec--toolbar__item::text").get()
+            )
+            comments_count = str(
+                details_selector.css(
+                    "#js-comments-btn::attr(data-count)"
+                ).get()
+            )
+            summary = str(
+                details_selector.css(".tec--article__body p *::text").get()
+            )
+            sources = details_selector.css(
+                ".z--mb-16 .tec--badge::text"
+            ).getall()
+            categories = details_selector.css(
+                "#js-categories .tec--badge::text"
+            ).getall()
+
             page_details = {
                 "url": url,
-                "title": details_selector.css(
-                    "h1.tec--article__header__title::text"
-                ).get(),
-                "timestamp": details_selector.css(
-                    "#js-article-date::attr(datetime)"
-                ).get(),
-                "writer": details_selector.css(
-                    ".tec--author__info__link::text"
-                ).get(),
-                "shares_count": str(
-                    details_selector.css(".tec--toolbar__item::text").get()
-                )[1],
-                "comments_count": details_selector.css(
-                    "#js-comments-btn::attr(data-count)"
-                ).get(),
-                "summary": details_selector.css(
-                    ".tec--article__body p *::text"
-                ).get(),
-                "sources": details_selector.css(
-                    ".z--mb-16 .tec--badge::text"
-                ).getall(),
-                "categories": details_selector.css(
-                    "#js-categories .tec--badge::text"
-                ).getall(),
+                "title": title,
+                "timestamp": timestamp,
+                "writer": writer,
+                "shares_count": [
+                    int(s) for s in shares_count.split() if s.isdigit()
+                ][0]
+                if shares_count != "None"
+                else 0,
+                "comments_count": int(comments_count)
+                if comments_count != "None"
+                else 0,
+                "summary": summary,
+                "sources": sources if sources != "None" else [],
+                "categories": categories if categories != "None" else [],
             }
             pages_details.append(page_details)
-        next_page_url = selector.css(".tec--btn::attr(href)").get()
-        page_url = fetch_content(str(next_page_url))
-    return page_details
+        # next_page_url = selector.css(".tec--btn::attr(href)").get()
+    # print(len(pages_details))
+    return pages_details
 
 
-# scrape(fetch_content("https://www.tecmundo.com.br/novidades"))
+scrape(fetch_content)

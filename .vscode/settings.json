@@ -9,5 +9,6 @@
         "-l 79"
     ],
     "python.formatting.provider": "black",
-    "python.linting.pylintEnabled": false
+    "python.linting.pylintEnabled": false,
+    "python.pythonPath": ".venv/bin/python"
 }

@@ -30,7 +30,9 @@ def scrape(fetcher, pages=1):
 
         for url in articles_url_list:
             snd_selector = Selector(fetcher(url))
-
+            writer = snd_selector.css(
+                ".z--items-center .tec--timestamp .z--font-bold a::text"
+            ).get()
             tech_news_list.append(
                 {
                     "url": url,
@@ -40,9 +42,7 @@ def scrape(fetcher, pages=1):
                     "timestamp": snd_selector.css(
                         ".tec--timestamp__item::attr(datetime)"
                     ).get(),
-                    "writer": snd_selector.css(
-                        ".z--items-center .tec--timestamp .z--font-bold a::text"
-                    ).get(),
+                    "writer": writer,
                     "shares_count": int(
                         snd_selector.css(".tec--toolbar__item::text").get()
                     ),

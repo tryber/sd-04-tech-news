@@ -1,15 +1,16 @@
 import requests
-import time
+from time import sleep
 
 
 def fetch_content(url, timeout=3, delay=0.5):
-    response = requests.get("https://www.tecmundo.com.br/novidades", timeout=3)
-    if response.status_code != "200":
+    try:
+        response = requests.get(url, timeout=timeout)
+        response.raise_for_status()
+    except (requests.HTTPError, requests.ReadTimeout):
         return ""
     else:
+        sleep(delay)
         return response.text
-
-    time.sleep(0.5)
 
 
 def scrape(fetcher, pages=1):

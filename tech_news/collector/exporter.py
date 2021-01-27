@@ -1,6 +1,7 @@
 import csv
 from tech_news.database import find_news
 
+
 FIELD_NAME = [
     "url",
     "title",
@@ -13,6 +14,7 @@ FIELD_NAME = [
     "categories",
 ]
 
+
 def content_list():
     content = find_news()
     for field in content:
@@ -20,6 +22,7 @@ def content_list():
             if isinstance(field[key], list):
                 field[key] = ",".join(field[key])
     return content
+
 
 def csv_exporter(filepath):
     if not filepath.endswith(".csv"):
@@ -32,3 +35,4 @@ def csv_exporter(filepath):
 
         writer.writeheader()
         writer.writerows(content)
+

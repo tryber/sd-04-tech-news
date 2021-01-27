@@ -1,5 +1,15 @@
+from tech_news.database import db
+
+
 def search_by_title(title):
-    """Seu código deve vir aqui"""
+    title = title.capitalize()
+    data = db.news.find({"title": title})
+
+    news_data = []
+    for i in data:
+        news_data.append((i['title'], i['url']))
+
+    return news_data
 
 
 def search_by_date(date):

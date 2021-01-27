@@ -37,4 +37,3 @@ def search_by_category(category):
         {"categories": {"$regex": category, "$options": "i"}}
     )
     return format_tuples(news_data)
-

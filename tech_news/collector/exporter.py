@@ -23,10 +23,10 @@ def csv_exporter(filepath):
                 ],
             )
 
-            for field in data:
-                for key in field:
-                    if isinstance(field[key], list):
-                        field[key] = ",".join(field[key])
+            for new in data:
+                for i in new:
+                    if isinstance(new[i], list):
+                        new[i] = ",".join(new[i])
 
             writer.writeheader()
             writer.writerows(data)

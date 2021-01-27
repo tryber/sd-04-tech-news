@@ -2,8 +2,7 @@ from tech_news.database import db
 
 
 def search_by_title(title):
-    title = title.capitalize()
-    data = db.news.find({"title": title})
+    data = db.news.find({"title": title.capitalize()})
 
     news_data = []
     for i in data:

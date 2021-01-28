@@ -2,6 +2,7 @@ from parsel import Selector
 import requests
 import time
 
+
 def fetch_content(url, timeout=3, delay=0.5):
     try:
         response = requests.get(url, timeout=timeout)
@@ -10,6 +11,7 @@ def fetch_content(url, timeout=3, delay=0.5):
         return response.text
     except (requests.ReadTimeout, requests.exceptions.HTTPError):
         return ""
+
 
 def scrape(fetcher, pages=1):
     base_URL = "https://www.tecmundo.com.br/novidades?page="
@@ -24,4 +26,3 @@ def scrape(fetcher, pages=1):
 
     def extractNumber(string):
         return [int(i) for i in string.split() if i.isdigit()][0]
-

@@ -7,6 +7,7 @@ def search_by(key, query):
     result = search_news({key: query})
     return [(news["title"], news["url"]) for news in result]
 
+
 def search_by_title(title):
     return search_by("title", title)
 

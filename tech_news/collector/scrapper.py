@@ -18,7 +18,7 @@ def fetch_content(url, timeout=3, delay=0.5):
 def get_news_content(url, selector):
     title = selector.css(".tec--article__header__title::text").get()
     timestamp = selector.css("#js-article-date::attr(datetime)").get()
-    writer = selector.css(".tec--author__info__link::attr(href)").get()
+    writer = selector.css("a.tec--author__info__link::text").get()
     shares_count = selector.css("tec--toolbar__item::text").re_first(r'\d')
     if shares_count is None:
         shares_count = "0"
@@ -26,7 +26,7 @@ def get_news_content(url, selector):
     if comments_count is None:
         comments_count = "0"
     summary = selector.css(".tec--article__body > p::text").get()
-    sources = selector.css(".tec--badge::text").get()
+    sources = selector.css("div.z--mb-16 .tec--badge::text").getall()
     categories = selector.css("#js-categories a::text").getall()
     return {
         "url": url,
@@ -50,7 +50,7 @@ def scrape(fetcher, pages=1):
     for page in range(1, pages + 1):
         selector = Selector(fetcher(f'{URL}?page={page}'))
         url_names = selector.css(
-            "a.tec--list__item .tec--card__title__link::attr(href)"
+            ".tec--list__item .tec--card__title__link::attr(href)"
             ).getall()
         for url in url_names:
             selector = Selector(fetcher(url))

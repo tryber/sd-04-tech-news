@@ -28,11 +28,11 @@ def scrape(fetcher, pages=1):
         for news_item in selector.css(selector_attribute).getall():
             news_response = fetcher(news_item)
             news_selector = Selector(text=news_response)
+            ns = news_selector
 
             url = news_item
             title = news_selector.css(".tec--article__header__title::text")
-            # timestamp = news_selector.css
-            # (".tec--timestamp__item time::attr(datetime)")
+            timestamp = ns.css(".tec--timestamp__item time::attr(datetime)")
             writer = news_selector.css(".tec--author__info__link::text")
             shares_count = news_selector.css
             (".tec--toolbar__item::attr(data-count)")
@@ -44,8 +44,7 @@ def scrape(fetcher, pages=1):
             news.append({
                 "url": url,
                 "title": title.get(),
-                "timestamp": news_selector.css
-                (".tec--timestamp__item time::attr(datetime)").get(),
+                "timestamp": timestamp.get(),
                 "writer": writer.get(),
                 "shares_count": shares_count,
                 "comments_count": comments_count,

@@ -21,7 +21,6 @@ def scrape(fetcher, pages=1):
     for page_num in range(1, pages + 1):
         selector = Selector(text=fetcher(base_url + str(page_num)))
         for news in selector.css("h3.tec--card__title"):
-            # print(news.css("a::attr(href)").get())
             url = news.css("a::attr(href)").get()
             details_selector = Selector(text=fetcher(url))
             title = str(
@@ -71,9 +70,4 @@ def scrape(fetcher, pages=1):
                 "categories": categories if categories != "None" else [],
             }
             pages_details.append(page_details)
-        # next_page_url = selector.css(".tec--btn::attr(href)").get()
-    # print(len(pages_details))
     return pages_details
-
-
-scrape(fetch_content)

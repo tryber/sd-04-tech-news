@@ -15,7 +15,6 @@ def fetch_content(url, timeout=3, delay=0.5):
 
 
 def scrape(fetcher, pages=1):
-    # selector = Selector(fetcher)
     tech_news = []
     for page in range(pages):
         URL = f"https://www.tecmundo.com.br/novidades?page={page}"
@@ -27,7 +26,7 @@ def scrape(fetcher, pages=1):
             timestamp = result.css("time#js-article-date::attr(datetime)").get()
             writer = result.css("a.tec--author__info__link::text").get()
             shares_count = result.css("div.tec--toolbar__item::text").re_first("\\d")
-            comments_count = result.css("#js-comments-btn::attr(datacount").getall()
+            comments_count = result.css("#js-comments-btn::attr(datacount").get()
             summary = result.css("div.tec--article__body p *::text").get()
             sources = result.css("div.z--mb-16 .tec--badge::text").getall()
             categories = result.css("div#js-categories .tec--badge--primary::text").getall()
@@ -36,8 +35,8 @@ def scrape(fetcher, pages=1):
                 "title": title,
                 "timestamp": timestamp,
                 "writer": writer,
-                "shares_count": shares_count,
-                "comments_count": comments_count,
+                "shares_count": int(shares_count),
+                "comments_count": int(comments_count),
                 "summary": summary,
                 "sources": sources,
                 "categories": categories,
@@ -45,3 +44,4 @@ def scrape(fetcher, pages=1):
 
     return tech_news
 
+# print(fetch_content('https://www.tecmundo.com.br/novidades'))

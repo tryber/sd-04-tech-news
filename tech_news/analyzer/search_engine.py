@@ -35,4 +35,10 @@ def search_by_source(source):
 
 
 def search_by_category(category):
-    """Seu código deve vir aqui"""
+    db_result = database.search_news({
+        "categories": {"$regex": category, "$options": "i"}
+    })
+    search_result = []
+    for news in db_result:
+        search_result.append((news["title"], news["url"]))
+    return search_result

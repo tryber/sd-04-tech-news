@@ -2,6 +2,7 @@ import parsel
 import requests
 from time import sleep
 
+
 def fetch_content(url, timeout=3, delay=0.5):
     try:
         response = requests.get(url, timeout=timeout)
@@ -12,6 +13,7 @@ def fetch_content(url, timeout=3, delay=0.5):
         return ''
     else:
         return response.text
+
 
 def extract_news_page(selector, url):
     title = selector.css("h1.tec--article__header__title::text").get()
@@ -35,7 +37,9 @@ def extract_news_page(selector, url):
     }
     return page
 
+
 URL_BASE = "https://www.tecmundo.com.br/"
+
 
 def scrape(fetcher, pages=1):
     news_page = []

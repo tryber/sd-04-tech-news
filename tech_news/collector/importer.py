@@ -12,6 +12,7 @@ baseArr = [
     "writer",
 ]
 
+
 def appendArr(arr, result):
     header, *data = result
     header.sort()
@@ -34,6 +35,7 @@ def appendArr(arr, result):
             }
         )
 
+
 def csv_importer(filepath):
     arr = []
     try:
@@ -46,5 +48,6 @@ def csv_importer(filepath):
         raise ValueError("Arquivo file_not_exist.csv não encontrado")
     else:
         return arr
+
 
 print(csv_importer("correct.csv"))

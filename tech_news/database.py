@@ -1,5 +1,6 @@
 from pymongo import MongoClient
 from decouple import config
+import re
 
 DB_HOST = config("DB_HOST", default="localhost")
 DB_PORT = config("DB_PORT", default="27017")
@@ -27,3 +28,11 @@ def find_news():
 
 def search_news(query):
     return list(db.news.find(query))
+
+
+def case_isensitive_search(query, keyword):
+    data = db.news.find({query: re.compile(keyword, re.IGNORECASE)})
+    news_data = []
+    for i in data:
+        news_data.append((i["title"], i["url"]))
+    return news_data

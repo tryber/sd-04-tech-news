@@ -31,7 +31,7 @@ def search_by_date(date):
 def search_by_source(source):
     news_list_by_source = []
     news_source = database.search_news(
-        {"source": {"$regex": source, "$options": "-i"}}
+        {"sources": {"$regex": source, "$options": "-i"}}
         )
     if len(news_source) == 1:
         news_list_by_source.append(
@@ -44,7 +44,7 @@ def search_by_source(source):
 def search_by_category(category):
     news_list_by_category = []
     news_category = database.search_news(
-        {"title": {"$regex": category, "$options": "-i"}}
+        {"categories": {"$regex": category, "$options": "-i"}}
         )
     if len(news_category) == 1:
         news_list_by_category.append(

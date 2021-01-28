@@ -36,12 +36,12 @@ def scrape(fetcher, pages=1):
                     .get(),
                 "writer":
                     new_selector.css(".tec--author__info__link::text").get(),
-                "shares_count": int(
+                "shares_count":
                     new_selector.css("tec--toolbar__item::text")
-                    .re.compile(r"[0-9]+")),
-                "comments_count": int(
+                    .re_first(r"[0-9]+"),
+                "comments_count":
                     new_selector.css("#js-comments-btn::text")
-                    .re.compile(r"[0-9]+")),
+                    .re_first(r"[0-9]+"),
                 "summary":
                     new_selector.css(".tec--article__body *::text").get(),
                 "sources": new_selector.css(".z--mb-16 a::text").getall(),

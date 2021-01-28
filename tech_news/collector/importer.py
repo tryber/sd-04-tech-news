@@ -30,5 +30,3 @@ def csv_importer(filepath):
 
     except FileNotFoundError:
         raise ValueError(f"Arquivo {filepath} não encontrado")
-
-csv_importer('dskdlskdl.dsds')

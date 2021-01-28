@@ -1,6 +1,7 @@
 from tech_news.database import search_news
 from datetime import datetime
 
+
 def search_by_title(title):
     """Seu código deve vir aqui"""
     result = []

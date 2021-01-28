@@ -13,6 +13,7 @@ header = [
     "categories",
 ]
 
+
 def csv_exporter(filepath):
     if not filepath.endswith(".csv"):
         raise ValueError("Formato invalido")

@@ -8,12 +8,6 @@ DB_PORT = config("DB_PORT", default="27017")
 client = MongoClient(host=DB_HOST, port=int(DB_PORT))
 db = client.tech_news
 
-""" # local com mongodb com usuário e senha
-client = MongoClient(
-    "mongodb://user:password@localhost:27017/?authMechanism=DEFAULT"
-)
-db = client.tech_news """
-
 
 def csv_exporter(filepath):
     if not filepath.endswith(".csv"):

@@ -1,8 +1,10 @@
 import csv
 from tech_news import database
 
+
 def list_to_string(list, separator=""):
     return f"{separator}".join(list)
+
 
 def csv_exporter(filepath):
     if not filepath.endswith(".csv"):

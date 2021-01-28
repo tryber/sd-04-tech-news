@@ -6,7 +6,7 @@ def csv_importer(filepath):
         raise ValueError("Formato invalido")
 
     try:
-        with open(filepath, encoding='utf-8') as file:
+        with open(filepath, encoding="utf-8") as file:
             reader = csv.DictReader(file, delimiter=";")
             content = ""
             for content in reader:
@@ -15,4 +15,4 @@ def csv_importer(filepath):
                 return values
 
     except FileNotFoundError:
-        raise ValueError("Arquivo tests/file_not_exist.csv não encontrado") 
+        raise ValueError("Arquivo tests/file_not_exist.csv não encontrado")

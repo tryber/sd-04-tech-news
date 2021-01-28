@@ -6,7 +6,7 @@ def csv_importer(filepath):
         raise ValueError("Formato invalido")
 
     try:
-        with open(filepath, encoding='utf-8') as file:
+        with open(filepath, encoding="utf-8") as file:
             reader = csv.DictReader(file, delimiter=";")
             content = ""
             for content in reader:

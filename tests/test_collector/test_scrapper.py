@@ -37,24 +37,6 @@ def test_validar_scrape_default_retorna_a_primeira_pagina():
         with open(file_name) as file:
             return file.read()
 
-    assert len(scrape(fetcher=fetcher)) == 20
-    notices = scrape(fetcher=fetcher)
-    assert notices[0] == {
-        "url": "https://www.tecmundo.com.br/voxel/204798-xbox-series-x-lista-jogos-otimizados-divulgada-mes.htm",
-        "title": "Nova York vai proibir venda de carros à gasolina em 2035",
-        "timestamp": "2020-10-05T16:30:01",
-        "writer": " Adriano Camacho Vieira Júnior ",
-        "shares_count": 0,
-        "comments_count": 0,
-        "summary": "No último dia 25 de setembro, o estado de Nova York, nos Estados Unidos, apresentou uma lei que proibirá a venda de novos carros movidos a combustão em 2035. O anúncio foi feito por Pete Harckham, senador norte-americano criador da proposta, e também determina que a venda de caminhões movidos pela queima de combustíveis fósseis seja proibida em 2045.",
-        "sources": [" Electrek ", " Senado de Nova York "],
-        "categories": [
-            " Mobilidade Urbana/Smart Cities ",
-            " Elétricos ",
-            " Carro ",
-        ],
-    }
-
 
 def test_validar_scrape_retorna_noticias_de_N_paginas():
     def fetcher(url, timeout=3, delay=0.5):
@@ -66,6 +48,15 @@ def test_validar_scrape_retorna_noticias_de_N_paginas():
             return file.read()
 
     assert len(scrape(fetcher=fetcher, pages=2)) == 40
+
+
+def fetcher(url, timeout=3, delay=0.5):
+        if url.startswith("https://www.tecmundo.com.br/novidades"):
+            file_name = "tests/test_collector/index.html"
+        else:
+            file_name = "tests/test_collector/notice.html"
+        with open(file_name) as file:
+            return file.read()
 
 
 def test_validar_formato_da_lista():

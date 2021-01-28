@@ -52,3 +52,4 @@ def scrape(fetcher, pages=1):
             new_selector = parsel.Selector(fetcher(url))
             news_page.append(extract_news_page(new_selector, url))
     return news_page
+    

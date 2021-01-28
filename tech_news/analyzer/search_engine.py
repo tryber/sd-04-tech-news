@@ -56,3 +56,4 @@ def search_by_category(category):
         {"title": True, "_id": False, "url": True},
     )
     return [(result["title"], result["url"]) for result in results]
+    

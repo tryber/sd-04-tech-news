@@ -29,11 +29,29 @@ def search_by_date(date):
 
 
 def search_by_source(source):
-    """Seu código deve vir aqui"""
+    news_list_by_source = []
+    news_source = database.search_news(
+        {"source": {"$regex": source, "$options": "-i"}}
+        )
+    if len(news_source) == 1:
+        news_list_by_source.append(
+            (news_source[0]["title"], news_source[0]["url"])
+            )
+
+    return news_list_by_source
 
 
 def search_by_category(category):
-    """Seu código deve vir aqui"""
+    news_list_by_category = []
+    news_category = database.search_news(
+        {"title": {"$regex": category, "$options": "-i"}}
+        )
+    if len(news_category) == 1:
+        news_list_by_category.append(
+            (news_category[0]["title"], news_category[0]["url"])
+            )
+
+    return news_list_by_category
 
 # mongo regex source:
 # https://docs.mongodb.com/manual/reference/operator/query/regex/

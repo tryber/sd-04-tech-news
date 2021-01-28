@@ -1,9 +1,19 @@
 from tech_news.database import db
 from bson.son import SON
+import pymongo
 
 
 def top_5_news():
-    data = db.news.find({}).sort("shares_count").limit(5)
+    data = (
+        db.news.find({})
+        .sort(
+            [
+                ("shares_count", pymongo.DESCENDING),
+                ("comments_count", pymongo.DESCENDING),
+            ]
+        )
+        .limit(5)
+    )
 
     news_data = []
     for i in data:

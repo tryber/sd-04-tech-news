@@ -1,4 +1,5 @@
 import csv
+from ..database import find_news
 
 
 def csv_exporter(filepath):

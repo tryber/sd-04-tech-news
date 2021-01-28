@@ -1,5 +1,6 @@
 import csv
 
+
 def csv_importer(filepath):
     try:
         if not filepath.endswith(".csv"):
@@ -20,7 +21,11 @@ def csv_importer(filepath):
             header, *data = data_reader
             if header != headers:
                 raise ValueError("Formato invalido")
-            result = [{header: data for header, data in zip(header, data)} for data in data]
+            result = [
+                {
+                    header: data for header, data in zip(header, data)
+                } for data in data
+            ]
             return result
     except FileNotFoundError:
         raise ValueError(f"Arquivo {filepath} não encontrado")

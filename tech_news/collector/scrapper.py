@@ -24,7 +24,8 @@ def scrape(fetcher, pages=1):
         selector = Selector(text=news_response)
 
         for new in selector.css(".tec--list__item h3 a::attr(href)").getall():
-            new_selector = Selector(text=new)
+            new_response = fetcher(new)
+            new_selector = Selector(text=new_response)
             new_list.append({
                 "url": new,
                 "title":
@@ -37,7 +38,7 @@ def scrape(fetcher, pages=1):
                 "writer":
                     new_selector.css(".tec--author__info__link::text").get(),
                 "shares_count":
-                    new_selector.css("tec--toolbar__item::text")
+                    new_selector.css(".tec--toolbar__item::text")
                     .re_first(r"[0-9]+"),
                 "comments_count":
                     new_selector.css("#js-comments-btn::text")

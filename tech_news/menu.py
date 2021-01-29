@@ -1,4 +1,6 @@
 from tech_news.collector.importer import csv_importer
+from tech_news.collector.exporter import csv_exporter
+from tech_news.collector.scrapper import scrape, fetch_content
 
 
 def collector_menu():
@@ -10,11 +12,14 @@ def collector_menu():
     )
 
     if entrada == "1":
-        return csv_importer("correct.csv")
+        file_path = input("Digite o nome do arquivo CSV a ser importado:")
+        return csv_importer(file_path)
     elif entrada == "2":
-        pass
+        file_path = input("Digite o nome do arquivo CSV a ser exportado:")
+        return csv_exporter(file_path)
     elif entrada == "3":
-        pass
+        pages = input("Digite a quantidade de páginas a serem raspadas:")
+        return scrape(fetch_content, pages=pages)
     elif entrada == "4":
         print("Encerrando script\n")
     else:

@@ -8,8 +8,6 @@ def csv_exporter(filepath):
 
     news = database.find_news()
 
-    print("news", news)
-
     with open(filepath, "w") as file:
         writer = csv.writer(file, delimiter=";")
 
@@ -33,5 +31,4 @@ def csv_exporter(filepath):
             else:
                 row.append(news[0][key_name])
 
-        print(row)
         writer.writerow(row)

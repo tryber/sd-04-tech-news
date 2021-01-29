@@ -1,6 +1,8 @@
 from tech_news.collector.importer import csv_importer
 from tech_news.collector.exporter import csv_exporter
 from tech_news.collector.scrapper import scrape, fetch_content
+from tech_news.database import create_news
+import sys
 
 
 def collector_menu():
@@ -13,18 +15,20 @@ def collector_menu():
 
     if entrada == "1":
         file_path = input("Digite o nome do arquivo CSV a ser importado:")
-        return csv_importer(file_path)
+        file_content = csv_importer(file_path)
+        create_news(file_content)
     elif entrada == "2":
         file_path = input("Digite o nome do arquivo CSV a ser exportado:")
-        return csv_exporter(file_path)
+        csv_exporter(file_path)
     elif entrada == "3":
         pages = input("Digite a quantidade de páginas a serem raspadas:")
-        return scrape(fetch_content, pages=pages)
+        data = scrape(fetcher=fetch_content, pages=int(pages))
+        create_news(data)
     elif entrada == "4":
         print("Encerrando script\n")
     else:
-        print("Opção inválida\n")
+        print("Opção inválida", file=sys.stderr)
 
 
 def analyzer_menu():
-    """Seu código deve vir aqui"""
+    pass

@@ -30,7 +30,7 @@ def collector_menu():
         pages = input("Digite a quantidade de páginas a serem raspadas: ")
         scraped = scrape(fetcher=fetch_content, pages=int(pages))
         return create_news(scraped)
-    elif menu_options == "7":
+    elif menu_options == "4":
         return print("Encerrando script")
     else:
         return print("Opção inválida", file=sys.stderr)

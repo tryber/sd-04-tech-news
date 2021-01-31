@@ -49,4 +49,4 @@ def scrape(fetcher, pages=1):
                             }
 
             list_news.append(page_details)
-    print(list_news)
+    return list_news

@@ -24,9 +24,29 @@ def scrape(fetcher, pages=1):
             details_url = Selector(text=fetcher(url))
             title = details_url.css("#js-article-title::text").get()
             timestamp = details_url.css("time::attr(datetime)").get()
-            writer = details_url.css(".z--m-none strong").get()
-            page_details = {"url": url, "title": title,
-                            "timestamp": timestamp, "writer": writer}
+            writer = details_url.css("a.tec--author__info__link::text").get()
+            shares_count = selector.css("div.tec--toolbar__item::text").get()
+            comments_count = selector.css(
+                "#js-comments-btn::attr(data-count)").get()
+            summary = selector.css(
+                ".tec--article__body p *::text"
+            ).get()
+            sources = selector.css(
+                 ".z--mb-16 .tec--badge::text"
+            ).getall()
+            categories = selector.css(
+                "#js-categories .tec--badge::text"
+            ).getall()
+
+            page_details = {"url": url,
+                            "title": title,
+                            "timestamp": timestamp,
+                            "writer": writer,
+                            "shares_count": shares_count,
+                            "comments_count": comments_count,
+                            "summary": summary,
+                            "sources": sources, "categories": categories
+                            }
 
             list_news.append(page_details)
     print(list_news)

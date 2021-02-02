@@ -34,4 +34,3 @@ def csv_exporter(filepath):
 
         writer.writeheader()
         writer.writerows(content)
-        

@@ -26,13 +26,13 @@ def scrape(fetcher, pages=1):
             timestamp = details_url.css("time::attr(datetime)").get()
             writer = details_url.css("a.tec--author__info__link::text").get()
             shares_count = details_url.css(".tec--toolbar__item::text")
-                .re_first(
-                    r"[0-9]+"
-                )
+            .re_first(
+                r"[0-9]+"
+            )
             comments_count = details_url.css("#js-comments-btn::text")
-                .re_first(
-                    r"[0-9]+"
-                )
+            .re_first(
+                r"[0-9]+"
+            )
             summary = str(
                 details_url.css(".tec--article__body p *::text").get()
             )

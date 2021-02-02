@@ -25,16 +25,20 @@ def scrape(fetcher, pages=1):
             title = details_url.css("#js-article-title::text").get()
             timestamp = details_url.css("time::attr(datetime)").get()
             writer = details_url.css("a.tec--author__info__link::text").get()
-            shares_count = selector.css("div.tec--toolbar__item::text").get()
-            comments_count = selector.css(
-                "#js-comments-btn::attr(data-count)").get()
-            summary = selector.css(
-                ".tec--article__body p *::text"
-            ).get()
-            sources = selector.css(
-                 ".z--mb-16 .tec--badge::text"
+            shares_count = details_url.css(".tec--toolbar__item::text").re_first(
+                r"[0-9]+"
+            )
+
+            comments_count = details_url.css("#js-comments-btn::text").re_first(
+                r"[0-9]+"
+            )
+            summary = str(
+                details_url.css(".tec--article__body p *::text").get()
+            )
+            sources = details_url.css(
+                ".z--mb-16 .tec--badge::text"
             ).getall()
-            categories = selector.css(
+            categories = details_url.css(
                 "#js-categories .tec--badge::text"
             ).getall()
 
@@ -42,8 +46,13 @@ def scrape(fetcher, pages=1):
                             "title": title,
                             "timestamp": timestamp,
                             "writer": writer,
-                            "shares_count": shares_count,
-                            "comments_count": comments_count,
+                            "shares_count":  
+
+                                #descobrir isso
+
+                            "comments_count":  int(comments_count)
+                            if comments_count != "None"
+                            else 0,
                             "summary": summary,
                             "sources": sources, "categories": categories
                             }

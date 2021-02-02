@@ -1,14 +1,21 @@
+from tech_news.database import search_news
+
+
 def search_by_title(title):
-    """Seu código deve vir aqui"""
+    data = search_news({"title": {"$regex": title, "$options": "i"}})
+    return data
 
 
 def search_by_date(date):
-    """Seu código deve vir aqui"""
+    data = search_news({"timestamp": {"$regex": date, "$options": "i"}})
+    return data
 
 
 def search_by_source(source):
-    """Seu código deve vir aqui"""
+    data = search_news({"source": {"$regex": source, "$options": "i"}})
+    return data
 
 
 def search_by_category(category):
-    """Seu código deve vir aqui"""
+    data = search_news({"categories": {"$regex": category, "$options": "i"}})
+    return data

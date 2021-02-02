@@ -7,7 +7,7 @@ def fetch_content(url, timeout=3, delay=0.5):
   	try:
     	sleep(delay)
     	response = requests.get(url, timeout=3)
-  		if response.status_code != 200:
+		if response.status_code != 200:
       		return ""
     	return response.text
   	except requests.ReadTimeout:

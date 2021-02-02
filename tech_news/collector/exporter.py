@@ -2,8 +2,16 @@ import csv
 from tech_news.database import find_news
 
 
-def csv_exporter(filepath):
+def content_notices():
     data = find_news()
+    for notice in data:
+        for index in notice:
+            if isinstance(notice[index], list):
+                notice[index] = ",".join(notice[index])
+    return data
+
+
+def csv_exporter(filepath):
 
     if not filepath.endswith(".csv"):
         raise ValueError("Formato invalido")
@@ -25,14 +33,10 @@ def csv_exporter(filepath):
                     "categories",
                 ],
             )
-
-            for notice in data:
-                for index in notice:
-                    if isinstance(notice[index], list):
-                        notice[index] = ",".join(notice[index])
+            content = content_notices()
 
             write.writeheader()
-            write.writerows(data)
+            write.writerows(content)
             file.close()
 
     except FileNotFoundError:

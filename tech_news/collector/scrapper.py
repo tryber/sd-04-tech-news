@@ -4,14 +4,14 @@ from parsel import Selector
 
 
 def fetch_content(url, timeout=3, delay=0.5):
-  	try:
-    	sleep(delay)
-    	response = requests.get(url, timeout=3)
-		if response.status_code != 200:
-      		return ""
-    	return response.text
-  	except requests.ReadTimeout:
-    return ""
+    try:
+        sleep(delay)
+        response = requests.get(url, timeout=3)
+        if response.status_code != 200:
+            return ""
+        return response.text
+    except requests.ReadTimeout:
+        return ""
 
 
 def scrape(fetcher, pages=1):
@@ -20,8 +20,8 @@ def scrape(fetcher, pages=1):
     for page in range(1, pages + 1):
         selector = Selector(text=fetcher(url + str(page)))
         for news in selector.css("h3.tec--card__title"):
-          	url = news.css("a::attr(href)").get()
-        	details_selector = Selector(text=fetcher(url))
+            url = news.css("a::attr(href)").get()
+            details_selector = Selector(text=fetcher(url))
             title = str(
                 details_selector.css(
                     "h1.tec--article__header__title::text"
@@ -50,18 +50,17 @@ def scrape(fetcher, pages=1):
             categories = details_selector.css(
                 "#js-categories .tec--badge::text"
             ).getall()
-
-          	page_details = {"url": url,
-                          	"title": title,
-                          	"timestamp": timestamp,
-                         	 "writer": writer,
-                         	 "shares_count": shares_count,
-                         	 "comments_count":  int(comments_count)
-                         	 if comments_count != "None"
-                         	 else 0,
-                         	 "summary": summary,
-                         	 "sources": sources, "categories": categories
-                         	}
-
-    		list_news.append(page_details)
-  	return list_news
+            page_details = {"url": url,
+                            "title": title,
+                            "timestamp": timestamp,
+                            "writer": writer,
+                            "shares_count": shares_count,
+                            "comments_count":  int(comments_count)
+                            if comments_count != "None"
+                            else 0,
+                            "summary": summary,
+                            "sources": sources, "categories": categories
+                            }
+            list_news.append(page_details)
+        print("passei aqui")
+    print(len(list_news))

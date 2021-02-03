@@ -63,4 +63,4 @@ def scrape(fetcher, pages=1):
                             }
             list_news.append(page_details)
         print("passei aqui")
-    print(len(list_news))
+    return(list_news)

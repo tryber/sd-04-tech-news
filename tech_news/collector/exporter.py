@@ -1,26 +1,9 @@
 import csv
-from tech_news.database import find_news
-
-FIELD_NAME = [
-    "url",
-    "title",
-    "timestamp",
-    "writer",
-    "shares_count",
-    "comments_count",
-    "summary",
-    "sources",
-    "categories",
-]
+from tech_news import database
 
 
-def treating_content_list():
-    content = find_news()
-    for field in content:
-        for key in field:
-            if isinstance(field[key], list):
-                field[key] = ",".join(field[key])
-    return content
+def list_to_string(list, separator=""):
+    return f"{separator}".join(list)
 
 
 def csv_exporter(filepath):
@@ -28,9 +11,22 @@ def csv_exporter(filepath):
     if not filepath.endswith(".csv"):
         raise ValueError("Formato invalido")
     with open(filepath, "w") as file:
-        writer = csv.DictWriter(file, fieldnames=FIELD_NAME, delimiter=";")
-
-        content = treating_content_list()
-
-        writer.writeheader()
-        writer.writerows(content)
+        writer = csv.writer(file, delimiter=";")
+        headers = [
+            "url",
+            "title",
+            "timestamp",
+            "writer",
+            "shares_count",
+            "comments_count",
+            "summary",
+            "sources",
+            "categories",
+        ]
+        writer.writerow(headers)
+        db_result = database.find_news()
+        for item in db_result:
+            item["sources"] = list_to_string(item["sources"], ",")
+            item["categories"] = list_to_string(item["categories"], ",")
+            writer.writerow(item.values())
+        file.close()

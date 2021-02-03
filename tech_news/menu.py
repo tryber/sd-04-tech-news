@@ -2,6 +2,8 @@ from tech_news.collector.importer import csv_importer
 from tech_news.collector.exporter import csv_exporter
 from tech_news.collector.scrapper import scrape, fetch_content
 from tech_news.database import create_news
+import sys
+
 
 def collector_option(opt_input):
     all_options = {

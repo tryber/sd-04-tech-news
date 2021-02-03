@@ -62,5 +62,4 @@ def scrape(fetcher, pages=1):
                             "sources": sources, "categories": categories
                             }
             list_news.append(page_details)
-        print("passei aqui")
     return(list_news)

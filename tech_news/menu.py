@@ -1,5 +1,5 @@
 def collector_menu():
-    """Seu código deve vir aqui"""
+    """Initial Commit"""
 
 
 def analyzer_menu():

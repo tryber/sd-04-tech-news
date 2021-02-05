@@ -1,5 +1,6 @@
 from collector.importer import csv_importer
 from collector.exporter import csv_exporter
+from collector.scrapper import scrape
 
 
 def collector_menu():
@@ -29,7 +30,8 @@ def collector_menu():
                 )
                 csv_exporter(export_file)
             elif user_choice == 3:
-                print("Digite a quantidade de páginas a serem raspadas:")
+                scrape_options = input("Digite a quantidade de páginas a serem raspadas:")
+                scrape(scrape_options)
             elif user_choice == 4:
                 print("Encerrando script")
                 break

@@ -10,8 +10,8 @@ def csv_exporter(filepath):
     try:
         with open(filepath, "w") as file:
             print(file)
-            writer = file.write(file)
+            writer = file.write('teste')
             print(writer)
 
     except FileNotFoundError:
-        raise ValueError("Arquivo inexistente")
+        raise ValueError("Formato Invalido")

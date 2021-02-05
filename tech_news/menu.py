@@ -1,6 +1,6 @@
-from tech_news.collector.importer import csv_importer
-from tech_news.collector.exporter import csv_exporter
-from tech_news.collector.scrapper import scrape
+# from tech_news.collector.importer import csv_importer
+# from tech_news.collector.exporter import csv_exporter
+# from tech_news.collector.scrapper import scrape
 
 import sys
 
@@ -41,6 +41,10 @@ def collector_menu():
 
     option_menu(user_choice)
 
+    new_choice = input()
+
+    print(new_choice)
+
     # if user_choice == 1:
     #     import_file = input()
     #     csv_importer(import_file)
@@ -58,3 +62,6 @@ def collector_menu():
 
 def analyzer_menu():
     """Seu código deve vir aqui"""
+
+
+collector_menu()

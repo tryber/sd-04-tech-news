@@ -67,29 +67,3 @@ def scrape(fetcher, pages=1):
                 }
             )
     return news
-
-
-# response = requests.get(
-#     "https://www.tecmundo.com.br/mercado/210534-internet-via-satelite-elon-musk-tem-10-mil-usuarios.htm/"
-# )
-# selector = Selector(text=response.text)
-
-# # O título está no atributo title em um elemento âncora (<a>)
-# # Dentro de um h3 em elementos que possuem classe product_pod
-# titles = "".join(
-#     selector.css(".tec--article__body p:first-of-type ::text").getall()
-# )
-# print(titles)
-# # # Estamos utilizando a::attr(title) para capturar somente o valor contido no texto do seletor
-
-# # # Os preços estão no texto de uma classe price_color
-# # # Que se encontra dentro da classe .product_price
-# # prices = selector.css(".product_price .price_color::text").getall()
-# # print(prices)
-
-# # # Combinando tudo podemos buscar os produtos
-# # # em em seguida buscar os valores individualmente
-# # for product in selector.css(".product_pod"):
-# #     title = product.css("h3 a::attr(title)").get()
-# #     price = product.css(".price_color::text").get()
-# #     print(title, price)

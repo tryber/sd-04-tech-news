@@ -30,7 +30,9 @@ def collector_menu():
                 )
                 csv_exporter(export_file)
             elif user_choice == 3:
-                scrape_options = input("Digite a quantidade de páginas a serem raspadas:")
+                scrape_options = input(
+                    "Digite a quantidade de páginas a serem raspadas:"
+                )
                 scrape(scrape_options)
             elif user_choice == 4:
                 print("Encerrando script")
@@ -41,6 +43,3 @@ def collector_menu():
 
 def analyzer_menu():
     """Seu código deve vir aqui"""
-
-
-collector_menu()

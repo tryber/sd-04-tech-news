@@ -1,6 +1,14 @@
-from collector.importer import csv_importer
-from collector.exporter import csv_exporter
-from collector.scrapper import scrape
+from tech_news.collector.importer import csv_importer
+from tech_news.collector.exporter import csv_exporter
+from tech_news.collector.scrapper import scrape
+
+import sys
+
+options = {
+    1: "Digite o nome do arquivo CSV a ser importado:",
+    2: "Digite o nome do arquivo CSV a ser exportado:",
+    3: "Digite a quantidade de páginas a serem raspadas:",
+}
 
 
 def collector_menu():
@@ -10,35 +18,25 @@ def collector_menu():
     print(" 2 - Exportar notícias para CSV;\n 3 - Raspar notícias online;")
     print(" 4 - Sair.")
 
-    while True:
-        try:
-            user_choice = int(input("Digite sua opção: "))
-        except (TypeError, ValueError):
-            print("Opção inválida")
-            continue
-        else:
-            # return user_choice
-            # print(user_choice)
-            if user_choice == 1:
-                import_file = input(
-                    "Digite o nome do arquivo CSV a ser importado:"
-                )
-                csv_importer(import_file)
-            elif user_choice == 2:
-                export_file = input(
-                    "Digite o nome do arquivo CSV a ser exportado:"
-                )
-                csv_exporter(export_file)
-            elif user_choice == 3:
-                scrape_options = input(
-                    "Digite a quantidade de páginas a serem raspadas:"
-                )
-                scrape(scrape_options)
-            elif user_choice == 4:
-                print("Encerrando script")
-                break
-            else:
-                print("Opção inválida")
+    try:
+        user_choice = int(input())
+    except (ValueError):
+        print("Opção inválida", file=sys.stderr)
+        return
+
+    if user_choice == 1:
+        import_file = input()
+        csv_importer(import_file)
+    elif user_choice == 2:
+        export_file = input()
+        csv_exporter(export_file)
+    elif user_choice == 3:
+        scrape_options = input()
+        scrape(scrape_options)
+    elif user_choice == 4:
+        print("Encerrando script")
+    else:
+        print("Opção inválida")
 
 
 def analyzer_menu():

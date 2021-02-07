@@ -7,11 +7,9 @@ def csv_importer(filepath):
     try:
         csv_file = open(filepath)
     except FileNotFoundError:
-        return  ValueError("file not found")
+        return ValueError("file not found")
     else:
-        with open(filepath) as file:
-            read_content = csv.DictReader(file, delimiter=";")
-            for content in read_content:
-                print(content)
-                values = content
-                return [values]
+        read_content = csv.DictReader(csv_file, delimiter=";")
+        for content in read_content:
+            values = content
+            return [values]

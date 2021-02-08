@@ -1,19 +1,23 @@
 from tech_news.database import search_news
+import datetime
 
 
 def search_by_title(title):
-    data = search_news({"title": {"$regex": title, "$options": "i"}})
-    return data
+    getData = search_news({"title": {"$regex": title, "$options": "i"}})
+    return [(data["title"], data["url"]) for data in getData]
 
 
 def search_by_date(date):
-    data = search_news({"timestamp": {"$regex": date, "$options": "i"}})
-    return data
+    try:
+        datetime.datetime.strptime(date, "%Y-%m-%d")
+        return search_news({"timestamp": {"$regex": date}})
+    except:
+        raise ValueError("Data inválida")
 
 
 def search_by_source(source):
-    data = search_news({"source": {"$regex": source, "$options": "i"}})
-    return data
+    getData = search_news({"source": {"$regex": source, "$options": "i"}})
+    return [(data["title"], data["url"]) for data in getData]
 
 
 def search_by_category(category):

@@ -10,16 +10,26 @@ def search_by_title(title):
 def search_by_date(date):
     try:
         datetime.datetime.strptime(date, "%Y-%m-%d")
-        return search_news({"timestamp": {"$regex": date}})
+        getData = search_news({"timestamp": {"$regex": date}})
+        return [(data["title"], data["url"]) for data in getData]
+
     except:
         raise ValueError("Data inválida")
 
 
 def search_by_source(source):
-    getData = search_news({"source": {"$regex": source, "$options": "i"}})
-    return [(data["title"], data["url"]) for data in getData]
+    try:
+        getData = search_news({"sources": {"$regex": source, "$options": "i"}})
+        return [(data["title"], data["url"]) for data in getData]
+    except:
+        return []
 
 
 def search_by_category(category):
-    data = search_news({"categories": {"$regex": category, "$options": "i"}})
-    return data
+    try:
+        getData = search_news(
+            {"categories": {"$regex": category, "$options": "i"}}
+        )
+        return [(data["title"], data["url"]) for data in getData]
+    except:
+        return []

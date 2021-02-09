@@ -1,6 +1,7 @@
 from tech_news.collector.importer import csv_importer
 from tech_news.collector.exporter import csv_exporter
 from tech_news.collector.scrapper import scrape, fetch_content
+from tech_news.database import create_news
 import sys
 
 
@@ -14,18 +15,20 @@ def collector_menu():
     )
 
     # todo input é string, então transofrmo para integer
-    user_choice = int(input())
+    user_choice = input()
 
-    if user_choice == 1:
+    if user_choice == "1":
         file = input("Digite o nome do arquivo CSV a ser importado:")
         action = csv_importer(file)
-    elif user_choice == 2:
+        return create_news(action)
+    elif user_choice == "2":
         file = input("Digite o nome do arquivo CSV a ser exportado:")
         return csv_exporter(file)
-    elif user_choice == 3:
+    elif user_choice == "3":
         pages = int(input("Digite a quantidade de páginas a serem raspadas:"))
         action = scrape(fetcher=fetch_content, pages=pages)
-    elif user_choice == 4:
+        return create_news(action)
+    elif user_choice == "4":
         return print("Encerrando script")
     else:
         # About stderr https://www.geeksforgeeks.org/how-to-print-to-stderr-and-stdout-in-python/

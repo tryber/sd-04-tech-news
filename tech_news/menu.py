@@ -6,6 +6,8 @@ import sys
 
 
 def collector_menu():
+    # REFERENCIA - https://www.youtube.com/watch?v=OBJL5vPj4-E
+
     print(
         """Selecione uma das opções a seguir:
  1 - Importar notícias a partir de um arquivo CSV;
@@ -31,7 +33,8 @@ def collector_menu():
     elif user_choice == "4":
         return print("Encerrando script")
     else:
-        # About stderr https://www.geeksforgeeks.org/how-to-print-to-stderr-and-stdout-in-python/
+        # About stderr
+        # https://www.geeksforgeeks.org/how-to-print-to-stderr-and-stdout-in-python/
         return print("Opção inválida", file=sys.stderr)
 
 

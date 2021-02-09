@@ -1,5 +1,5 @@
 import requests
-import time
+from time import sleep
 from parsel import Selector
 
 BASE_URL = "https://www.tecmundo.com.br/novidades"
@@ -12,8 +12,9 @@ def fetch_content(url, timeout=3, delay=0.5):
     except (requests.ReadTimeout, requests.exceptions.HTTPError):
         return ""
     else:
-        time.sleep(delay)
         return response.text
+    finally:
+        sleep(delay)
 
 
 def scrape(fetcher, pages=1):

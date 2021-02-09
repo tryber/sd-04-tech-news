@@ -1,4 +1,4 @@
-from tech_news.database import search_news, get_categories, get_top
+from tech_news.database import get_categories, get_top
 
 
 def top_5_news():

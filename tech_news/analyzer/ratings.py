@@ -8,9 +8,7 @@ def top_5_news():
             [
                 {
                     "$addFields": {
-                        "count": {
-                            "$sum": ["$shares_count", "$comments_count"]
-                        }
+                        "count": {"$sum": ["$shares_count", "$comments_count"]}
                     }
                 },
                 {"$sort": {"count": -1, "title": 1}},
@@ -20,7 +18,7 @@ def top_5_news():
     )
     client.close()
     for news in search_results:
-        result.append((news["title"], news["url"]))    
+        result.append((news["title"], news["url"]))
 
     return result
 
@@ -41,6 +39,6 @@ def top_5_categories():
     )
     client.close()
     for news in search_results:
-        result.append(news["_id"])   
+        result.append(news["_id"])
 
     return result

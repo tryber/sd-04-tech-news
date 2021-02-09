@@ -1,6 +1,8 @@
-import requests
+from parsel import Selector
 from time import sleep
-# from parsel import Selector
+import requests
+
+URL_BASE = "https://www.tecmundo.com.br/novidades"
 
 
 def fetch_content(url, timeout=3, delay=0.5):
@@ -15,9 +17,43 @@ def fetch_content(url, timeout=3, delay=0.5):
 
 
 def scrape(fetcher, pages=1):
-    URLBASE = "https://www.tecmundo.com.br/novidades"
-    next_page = '?page=2'
-    res = fetch_content(URLBASE + next_page)
-    # selector = Selector(text=res.text)
-    # url = selector.css("figure.tec--card__Thumb a::attr(href)").getall()
-    print(res)
+    list_news = []
+    page = 1
+    while page <= pages:
+        response = fetcher(URL_BASE + "?page={page}")
+        selector = Selector(text=response)
+        for url in selector.css(".tec--list__item h3 a::attr(href)").getall():
+            selector_url = Selector(text=fetcher(url))
+            list_news.append(
+                {
+                    "url": url,
+                    "title": selector_url.css(
+                        ".tec--article__header__title::text"
+                    ).get(),
+                    "timestamp": selector_url.css(
+                        ".tec--timestamp__item time::attr(datetime)"
+                    ).get(),
+                    "writer": selector_url.css(
+                        ".tec--author__info__link::text"
+                    ).get(),
+                    "shares_count": int(
+                        selector_url.css(".tec--toolbar__item::text").re_first(
+                            r"[0-9]+"
+                        )
+                    ),
+                    "comments_count": int(
+                        selector_url.css("#js-comments-btn::text").re_first(
+                            r"[0-9]+"
+                        )
+                    ),
+                    "summary": selector_url.css(
+                        ".tec--article__body *::text"
+                    ).get(),
+                    "sources": selector_url.css(".z--mb-16 a::text").getall(),
+                    "categories": selector_url.css(
+                        "#js-categories a::text"
+                    ).getall(),
+                }
+            )
+        page += 1
+    return list_news

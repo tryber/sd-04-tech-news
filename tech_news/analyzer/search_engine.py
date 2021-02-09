@@ -13,7 +13,7 @@ def search_by_date(date):
         getData = search_news({"timestamp": {"$regex": date}})
         return [(data["title"], data["url"]) for data in getData]
 
-    except:
+    except ValueError:
         raise ValueError("Data inválida")
 
 
@@ -21,7 +21,7 @@ def search_by_source(source):
     try:
         getData = search_news({"sources": {"$regex": source, "$options": "i"}})
         return [(data["title"], data["url"]) for data in getData]
-    except:
+    except ValueError:
         return []
 
 
@@ -31,5 +31,5 @@ def search_by_category(category):
             {"categories": {"$regex": category, "$options": "i"}}
         )
         return [(data["title"], data["url"]) for data in getData]
-    except:
+    except ValueError:
         return []

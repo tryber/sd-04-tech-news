@@ -3,9 +3,12 @@ from time import sleep
 
 
 def fetch_content(url, timeout=3, delay=0.5):
-    """Seu código deve vir aqui"""
-    response = requests.get(url, timeout=timeout)
-    sleep(delay)
+    try:
+        response = requests.get(url, timeout=timeout)
+        sleep(delay)
+    except requests.ReadTimeout:
+        response = ""
+        return response
     # print('Iniciando o projeto tech-news')
     # print('response:', response)
     # print(response.status_code)

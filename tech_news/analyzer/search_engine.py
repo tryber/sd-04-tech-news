@@ -1,4 +1,5 @@
 from tech_news.database import db
+from datetime import datetime
 import re
 
 
@@ -13,6 +14,19 @@ def search_by_title(title):
 
 def search_by_date(date):
     """Seu código deve vir aqui"""
+    try:
+        if datetime.strptime(date, "%Y-%m-%d"):
+            lista = list(
+                db.news.find({"timestamp": re.compile(date, re.IGNORECASE)})
+            )
+            data = []
+
+        for x in lista:
+            data.append((x["title"], x["url"]))
+        return data
+
+    except ValueError:
+        raise ValueError("Data inválida")
 
 
 def search_by_source(source):

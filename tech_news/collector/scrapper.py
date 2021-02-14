@@ -7,12 +7,11 @@ def fetch_content(url, timeout=3, delay=0.5):
     try:
         response = requests.get(url, timeout=timeout)
         response.raise_for_status()
+        time.sleep(delay)
     except requests.exceptions.RequestException:
         return ""
     else:
         return response.text
-    finally:
-        time.sleep(delay)
 
 
 URL_BASE = "https://www.tecmundo.com.br/novidades"

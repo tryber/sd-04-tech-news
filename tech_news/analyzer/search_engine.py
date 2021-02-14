@@ -1,39 +1,28 @@
-from tech_news.database import find_news
 from datetime import datetime
+from ..database import search_news
 
 
-def create_tuple(data):
-    if data == []:
-        return []
-    search_for_news = []
-    for news in data:
-        search_for_news.append((news["title"], news["url"]))
-        return search_for_news
+def search_by(key, query):
+    print({key: query})
+    result = search_news({key: query})
+    return [(news["title"], news["url"]) for news in result]
 
 
 def search_by_title(title):
-    news_data = find_news({"title": {"$regex": title, "$options": "i"}})
-    return create_tuple(news_data)
+    return search_by("title", title)
 
 
 def search_by_date(date):
     try:
-        if datetime.strptime(date, "%Y-%m-%d"):
-            news_data = find_news(
-                {"timestamp": {"$regex": date, "$options": "i"}}
-            )
-            return create_tuple(news_data)
+        datetime.strptime(date, "%Y-%m-%d")
+        return search_by("timestamp", {"$regex": date})
     except ValueError:
         raise ValueError("Data inválida")
 
 
 def search_by_source(source):
-    news_data = find_news({"sources": {"$regex": source, "$options": "i"}})
-    return create_tuple(news_data)
+    return search_by("sources", source)
 
 
 def search_by_category(category):
-    news_data = find_news(
-        {"categories": {"$regex": category, "$options": "i"}}
-    )
-    return create_tuple(news_data)
+    return search_by("categories", category)

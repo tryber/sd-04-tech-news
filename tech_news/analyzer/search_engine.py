@@ -2,6 +2,15 @@ from datetime import datetime
 from ..database import search_news
 
 
+def create_tuples(data):
+    if data == []:
+        return []
+    search_for_news = []
+    for new in data:
+        search_for_news.append((new["title"], new["url"]))
+        return search_for_news
+
+
 def search_by(key, query):
     result = search_news({key: {"$regex": query, "$options": "i"}})
     return [(news["title"], news["url"]) for news in result]

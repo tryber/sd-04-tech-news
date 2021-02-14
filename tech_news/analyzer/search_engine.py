@@ -3,8 +3,7 @@ from ..database import search_news
 
 
 def search_by(key, query):
-    print({key: query})
-    result = search_news({key: query})
+    result = search_news({key: {"$regex": query, "$options": "i"}})
     return [(news["title"], news["url"]) for news in result]
 
 

@@ -1,14 +1,36 @@
+from datetime import datetime
+from ..database import search_news
+
+
+def create_tuples(data):
+    if data == []:
+        return []
+    search_for_news = []
+    for new in data:
+        search_for_news.append((new["title"], new["url"]))
+        return search_for_news
+
+
+def search_by(key, query):
+    result = search_news({key: {"$regex": query, "$options": "i"}})
+    return [(news["title"], news["url"]) for news in result]
+
+
 def search_by_title(title):
-    """Seu código deve vir aqui"""
+    return search_by("title", title)
 
 
 def search_by_date(date):
-    """Seu código deve vir aqui"""
+    try:
+        datetime.strptime(date, "%Y-%m-%d")
+        return search_by("timestamp", date)
+    except ValueError:
+        raise ValueError("Data inválida")
 
 
 def search_by_source(source):
-    """Seu código deve vir aqui"""
+    return search_by("sources", source)
 
 
 def search_by_category(category):
-    """Seu código deve vir aqui"""
+    return search_by("categories", category)

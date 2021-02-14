@@ -14,7 +14,7 @@ def search_by_title(title):
 def search_by_date(date):
     try:
         datetime.strptime(date, "%Y-%m-%d")
-        return search_by("timestamp", {"$regex": date})
+        return search_by("timestamp", date)
     except ValueError:
         raise ValueError("Data inválida")
 

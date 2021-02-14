@@ -12,14 +12,14 @@ def create_tuple(data):
 
 
 def search_by_title(title):
-    news_data = search_news({"title": {"$regex": title, "$options": "i"}})
+    news_data = find_news({"title": {"$regex": title, "$options": "i"}})
     return create_tuple(news_data)
 
 
 def search_by_date(date):
     try:
         if datetime.strptime(date, "%Y-%m-%d"):
-            news_data = search_news(
+            news_data = find_news(
                 {"timestamp": {"$regex": date, "$options": "i"}}
             )
             return create_tuple(news_data)
@@ -28,12 +28,12 @@ def search_by_date(date):
 
 
 def search_by_source(source):
-    news_data = search_news({"sources": {"$regex": source, "$options": "i"}})
+    news_data = find_news({"sources": {"$regex": source, "$options": "i"}})
     return create_tuple(news_data)
 
 
 def search_by_category(category):
-    news_data = search_news(
+    news_data = find_news(
         {"categories": {"$regex": category, "$options": "i"}}
     )
     return create_tuple(news_data)

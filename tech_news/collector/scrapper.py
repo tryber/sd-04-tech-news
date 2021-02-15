@@ -45,7 +45,6 @@ def scrape(fetcher=Url, pages=1):
         summary = selector.css(".tec--article__body.z--px-16 *::text").get()
         sources = selector.css(".z--mb-16.z--px-16 a::text").getall()
         categories = selector.css("#js-categories a::text").getall()
-        # ".tec--btn::attr(data-count)" 
         list_news.append({'url': link_news,
                           'title': title,
                           'timestamp': timestamp,

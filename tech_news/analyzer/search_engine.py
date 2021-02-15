@@ -24,8 +24,8 @@ def search_by_date(date):
 
 
 def search_by_source(source):
-    """Seu código deve vir aqui"""
+    return general_search("sources", source)
 
 
 def search_by_category(category):
-    """Seu código deve vir aqui"""
+    return general_search("categories", category)

@@ -3,7 +3,7 @@ import datetime
 
 
 def general_search(field, query):
-    result = search_news({field: query})
+    result = search_news({field: {"$regex": query, "$options": "i"}})
     return [(news["title"], news["url"]) for news in result]
 
 

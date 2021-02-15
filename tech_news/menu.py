@@ -62,16 +62,16 @@ def analyzer_menu():
         opt = input("Digite a fonte:")
         source = search_by_source(opt)
         print(source)
-    elif option == "4":
-        opt = input("Digite a categoria:")
-        category = search_by_category(opt)
-        print(category)
-    elif option == "5":
-        top = top_5_news()
-        print(top)
-    elif option == "6":
-        top = top_5_categories()
-        print(top)
+    # elif option == "4":
+    #     opt = input("Digite a categoria:")
+    #     category = search_by_category(opt)
+    #     print(category)
+    # elif option == "5":
+    #     top = top_5_news()
+    #     print(top)
+    # elif option == "6":
+    #     top = top_5_categories()
+    #     print(top)
     elif option == "7":
         print("Encerrando script\n")
         return

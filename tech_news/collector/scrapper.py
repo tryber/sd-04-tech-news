@@ -56,12 +56,29 @@ def scrape(fetcher, pages=1):
             ".tec--toolbar__item button::attr(data-count)"
         ).get()
     )
+    # Primeiro parágrafo é o resumo
+    # Primeiro parágrafo
+    first_paragraph = selector_detail_notice.css(
+        ".tec--article__body p"
+    ).get()
+    # Texto do primeiro parágrafo dentro de um array
+    text_nodes_first_paragraph = Selector(
+        text=first_paragraph
+    ).css("*::text").getall()
+    # Transformando o resumo em string
+    summary = ""
+    for phrases in text_nodes_first_paragraph:
+        summary += phrases
+
     print("\nURL:", urls[0])
     print("TITLE:", title)
     print("TIMESTAMP:", timestamp)
     print("WRITE:", writer)
     print("SHARES_COUNT:", shares_count)
     print("COMMENTS_COUNT:", comments_count)
+    # print("\nFIRST_PARAGRAPH:", first_paragraph)
+    # print("TEXT_NODES_FIRST_PARAGRAPH:", text_nodes_first_paragraph)
+    print("SUMMARY:", summary)
 
     # news.append(new)
     # url = selector.css(".tec--list").getall()

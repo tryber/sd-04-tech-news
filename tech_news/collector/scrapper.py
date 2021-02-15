@@ -8,15 +8,13 @@ Url = "https://www.tecmundo.com.br/novidades"
 def fetch_content(url, timeout=3, delay=0.5):
     """Seu código deve vir aqui"""
     try:
-        response = requests.get(url, timeout=timeout)
-        time.sleep(delay)
-        print(response.status_code)
-        if response.status_code == 200:
-            # print(response.text)
-            return response.text
-    except requests.status_codes:
-        requests.get(url + "/404")
+        response = requests.get(url, timeout=timeout)        
+        response.raise_for_status()
+        return response.text
+    except (requests.ReadTimeout, requests.HTTPError):        
         return ""
+    finally:
+        time.sleep(delay)
 
 
 def scrape(fetcher=Url, pages=1):

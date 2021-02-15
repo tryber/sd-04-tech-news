@@ -4,12 +4,12 @@ from tech_news.collector.exporter import csv_exporter
 from tech_news.collector.scrapper import scrape, fetch_content
 from tech_news.database import create_news
 from tech_news.analyzer.search_engine import (
-    search_by_category,
+    # search_by_category,
     search_by_date,
     search_by_source,
     search_by_title,
     )
-from tech_news.analyzer.ratings import top_5_categories, top_5_news
+# from tech_news.analyzer.ratings import top_5_categories, top_5_news
 
 
 def collector_menu():

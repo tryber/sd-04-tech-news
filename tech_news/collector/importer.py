@@ -2,6 +2,8 @@ import csv
 
 
 # Funções auxiliares para fazer o csv_importer
+# Obs.: Talvez precise transformar o "shares_count"
+# e o "comments_count", em inteiros/números
 def make_csv_list(reader_csv, required_header):
     list_csv = []
     for row in reader_csv:

@@ -1,4 +1,5 @@
 from tech_news.database import search_news
+import datetime
 
 
 def make_tuple(data):
@@ -10,11 +11,17 @@ def make_tuple(data):
 
 def search_by_title(title):
     result = search_news({"title": {"$regex": title, "$options": 'im'}})
+    print("\nRESULT:", result)
     return make_tuple(result)
 
 
 def search_by_date(date):
-    """Seu código deve vir aqui"""
+    try:
+        datetime.datetime.strptime(date, "%Y-%m-%d")
+        result = search_news({"timestamp": {"$regex": date, "$options": 'im'}})
+        return make_tuple(result)
+    except ValueError:
+        raise ValueError("Data inválida")
 
 
 def search_by_source(source):

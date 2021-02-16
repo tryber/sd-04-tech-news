@@ -12,7 +12,6 @@ from parsel import Selector
 
 def fetch_content(url, timeout=3, delay=0.5):
     # bloco try/except = try/catch
-    url = "https://www.tecmundo.com.br/novidades"
     try:
         # fazendo a requisicao http
         response = requests.get(

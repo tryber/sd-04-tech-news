@@ -11,7 +11,6 @@ def make_tuple(data):
 
 def search_by_title(title):
     result = search_news({"title": {"$regex": title, "$options": 'im'}})
-    print("\nRESULT:", result)
     return make_tuple(result)
 
 
@@ -25,11 +24,13 @@ def search_by_date(date):
 
 
 def search_by_source(source):
-    """Seu código deve vir aqui"""
+    result = search_news({"sources": {"$regex": source, "$options": 'i'}})
+    return make_tuple(result)
 
 
 def search_by_category(category):
-    """Seu código deve vir aqui"""
+    result = search_news({"categories": {"$regex": category, "$options": 'i'}})
+    return make_tuple(result)
 
 
 # Teste local

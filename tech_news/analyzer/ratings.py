@@ -21,14 +21,19 @@ def top_5_news():
 
 def top_5_categories():
     result = list(db.news.aggregate([
-        {"$addFields": {"sum_shares_comments": {"$add": ["$shares_count", "$comments_count"]}}},
-        {"$sort": {"sum_shares_comments": -1, "title": 1}},
+        {"$unwind": "$categories"},
+        {"$group": {"_id": "$categories", "count": {"$sum": 1}}},
+        {"$sort": {"count": -1, "_id": 1}},
         {"$limit": 5}
         ])
     )
-    print("\nRESULT:", result)
-    return make_tuple(result)
 
+    new_list = []
+    for categorie in result:
+        new_list.append(categorie["_id"])
+    new_list
+
+    return new_list
 
 # Teste local
 # python3 -i tech_news/analyzer/ratings.py

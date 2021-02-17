@@ -6,7 +6,7 @@ from tech_news.database import create_news
 
 
 def collector_menu():
-    menu = (
+    menu_options = (
         "Selecione uma das opções a seguir:\n"
         " 1 - Importar notícias a partir de um arquivo CSV;\n"
         " 2 - Exportar notícias para CSV;\n"
@@ -19,7 +19,6 @@ def collector_menu():
         "2": "Digite o nome do arquivo CSV a ser exportado:",
         "3": "Digite a quantidade de páginas a serem raspadas:",
         "4": "Encerrando script\n",
-        "5": "Opção inválida"
     }
 
     functions = {
@@ -28,16 +27,14 @@ def collector_menu():
         "3": lambda p: scrape(fetcher=fetch_content, pages=int(p)),
     }
 
-    option = input(menu)
+    option = input(menu_options)
     try:
         print(options_to_select[option])
-        if int(option) < 1 or int(option) > 4:
-            return print(options_to_select["5"], file=sys.stderr)
     except KeyError:
-        return options_to_select["5"]
+        return sys.stderr.write("Opção inválida\n")
 
     # Encerra o script
-    if int(option) > 3:
+    if int(option) == 4:
         return
 
     option_function = input()

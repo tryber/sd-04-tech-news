@@ -39,7 +39,8 @@ def scrape(fetcher=Url, pages=1):
             shares_count = selector.css(".tec--toolbar__item *::text").get()
             comments_count = \
                 selector.css("#js-comments-btn::attr(data-count)").get()
-            summary = selector.css(".tec--article__body.z--px-16 *::text").get()
+            summary = \
+                selector.css(".tec--article__body.z--px-16 *::text").get()
             sources = selector.css(".z--mb-16.z--px-16 a::text").getall()
             categories = selector.css("#js-categories a::text").getall()
             list_news.append({'url': link_news,

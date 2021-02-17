@@ -1,6 +1,36 @@
+from tech_news.database import db
+
+
+def make_tuple(data):
+    new_tuple = []
+    for news in data:
+        new_tuple.append((news["title"], news["url"]))
+    return new_tuple
+
+
 def top_5_news():
-    """Seu código deve vir aqui"""
+    result = list(db.news.aggregate([
+        {"$addFields": {"sum_shares_comments": {"$add": ["$shares_count", "$comments_count"]}}},
+        {"$sort": {"sum_shares_comments": -1, "title": 1}},
+        {"$limit": 5}
+        ])
+    )
+    print("\nRESULT:", result)
+    return make_tuple(result)
 
 
 def top_5_categories():
-    """Seu código deve vir aqui"""
+    result = list(db.news.aggregate([
+        {"$addFields": {"sum_shares_comments": {"$add": ["$shares_count", "$comments_count"]}}},
+        {"$sort": {"sum_shares_comments": -1, "title": 1}},
+        {"$limit": 5}
+        ])
+    )
+    print("\nRESULT:", result)
+    return make_tuple(result)
+
+
+# Teste local
+# python3 -i tech_news/analyzer/ratings.py
+# top_5_news()
+# top_5_categories()

@@ -13,7 +13,8 @@ def top_5_news():
     # lista as cinco notícias com a maior soma
     # de compartilhamentos e comentários do banco de dados
     top_news = list(db.news.aggregate([
-        {"$addFields": {"sum_shares_comments": {"$add": ["$shares_count", "$comments_count"]}}},
+        {"$addFields": {"sum_shares_comments":
+                            {"$add": ["$shares_count", "$comments_count"]}}},
         {"$sort": {"sum_shares_comments": -1, "title": 1}},
         {"$limit": 5}
     ]))

@@ -11,7 +11,7 @@ def filter_news(data):
 
 def search_by_title(title):
     """Seu código deve vir aqui"""
-    search = search_news({"title": {"$regex": title, "$options": "i"}})   
+    search = search_news({"title": {"$regex": title, "$options": "i"}})
     return filter_news(search)
 
 
@@ -22,7 +22,7 @@ def search_by_date(date):
     # python-query-by-dates-that-are-stored-as-strings-in-mongodb-collection
     try:
         datetime.datetime.strptime(date, '%Y-%m-%d')
-        search = search_news({"timestamp": {"$regex": date, "$options": "i"}})  
+        search = search_news({"timestamp": {"$regex": date, "$options": "i"}})
         return filter_news(search)
     except ValueError:
         raise ValueError("Data inválida")
@@ -37,4 +37,4 @@ def search_by_source(source):
 def search_by_category(category):
     """Seu código deve vir aqui"""
     search = search_news({"categories": {"$regex": category, "$options": "i"}})
-    return filter_news(search)   
+    return filter_news(search)

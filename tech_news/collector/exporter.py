@@ -10,7 +10,7 @@ def csv_exporter(filepath):
         # cabeçalhos
         columns = ['url', 'title', 'timestamp', 'writer', 'shares_count',
                    'comments_count', 'summary', 'sources', 'categories']
-        # escreve uma linha com os cabeçalhos no arquivo csv 
+        # escreve uma linha com os cabeçalhos no arquivo csv
         writer = csv.DictWriter(csvfile, fieldnames=columns, delimiter=';')
         writer.writeheader()
         # obtendo os dados do banco

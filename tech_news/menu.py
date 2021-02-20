@@ -14,12 +14,13 @@ from tech_news.analyzer.ratings import top_5_news, top_5_categories
 
 def collector_menu():
     """Seu código deve vir aqui"""
-    menu_collector = input("Selecione uma das opções a seguir:\n"
-                           " 1 - Importar notícias a partir de um arquivo CSV;\n"
-                           " 2 - Exportar notícias para CSV;\n"
-                           " 3 - Raspar notícias online;\n"
-                           " 4 - Sair.\n"
-                           )
+    menu_collector = \
+        input("Selecione uma das opções a seguir:\n"
+              " 1 - Importar notícias a partir de um arquivo CSV;\n"
+              " 2 - Exportar notícias para CSV;\n"
+              " 3 - Raspar notícias online;\n"
+              " 4 - Sair.\n"
+              )
 
     if menu_collector == "1":
         import_csv = input("Digite o nome do arquivo CSV a ser importado: ")
@@ -39,7 +40,7 @@ def collector_menu():
 
 
 def analyzer_menu():
-    """Seu código deve vir aqui"""
+    """Seu código deve vir aqui""" 
     menu_analyzer = input("Selecione uma das opções a seguir:\n"
                           " 1 - Buscar notícias por título;\n"
                           " 2 - Buscar notícias por data;\n"
@@ -47,22 +48,32 @@ def analyzer_menu():
                           " 4 - Buscar notícias por categoria;\n"
                           " 5 - Listar top 5 notícias;\n"
                           " 6 - Listar top 5 categorias;\n"
-                          " 7 - Sair."
+                          " 7 - Sair.\n"
                           )
 
-    if menu_analyzer == "1":
-        return search_by_title(input("Digite o titulo:"))
-    elif menu_analyzer == "2":
-        return search_by_date(input("Digite a data no formato aaaa-mm-dd:"))
-    elif menu_analyzer == "3":
-        return search_by_source(input("Digite a fonte:"))
-    elif menu_analyzer == "4":
-        return search_by_category(input("Digite a categoria:"))
-    elif menu_analyzer == "5":
-        return top_5_news()
-    elif menu_analyzer == "6":
-        return top_5_categories()
-    elif menu_analyzer == "7":
-        return print("Encerrando script\n")
-    else:
-        sys.stderr.write("Opção inválida\n")
+    options_analyzer = {
+        "1": "Digite o título:",
+        "2": "Digite a data no formato aaaa-mm-dd:",
+        "3": "Digite a fonte:",
+        "4": "Digite a categoria:",
+        "5": "5",
+        "6": "6",          
+    }
+
+    functions = {
+        "1": search_by_title,
+        "2": search_by_date,
+        "3": search_by_source,
+        "4": search_by_category,
+        "5": top_5_news,
+        "6": top_5_categories,      
+    }
+
+    try:
+        if menu_analyzer == "7":
+            return print("Encerrando script\n"),
+        print(options_analyzer[menu_analyzer])
+        term = input()
+        return functions[menu_analyzer](term)
+    except KeyError:
+        return sys.stderr.write("Opção inválida\n")  

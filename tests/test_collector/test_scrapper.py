@@ -31,9 +31,9 @@ def test_validar_tempo_sleep_do_fecth():
 def test_validar_scrape_default_retorna_a_primeira_pagina():
     def fetcher(url, timeout=3, delay=0.5):
         if url.startswith("https://www.tecmundo.com.br/novidades"):
-            file_name = "tests/test_collector/index.html"
+            file_name = "index.html"
         else:
-            file_name = "tests/test_collector/notice.html"
+            file_name = "notice.html"
         with open(file_name) as file:
             return file.read()
 
@@ -59,9 +59,9 @@ def test_validar_scrape_default_retorna_a_primeira_pagina():
 def test_validar_scrape_retorna_noticias_de_N_paginas():
     def fetcher(url, timeout=3, delay=0.5):
         if url.startswith("https://www.tecmundo.com.br/novidades"):
-            file_name = "tests/test_collector/index.html"
+            file_name = "index.html"
         else:
-            file_name = "tests/test_collector/notice.html"
+            file_name = "notice.html"
         with open(file_name) as file:
             return file.read()
 
@@ -71,9 +71,9 @@ def test_validar_scrape_retorna_noticias_de_N_paginas():
 def test_validar_formato_da_lista():
     def fetcher(url, timeout=3, delay=0.5):
         if url.startswith("https://www.tecmundo.com.br/novidades"):
-            file_name = "tests/test_collector/index.html"
+            file_name = "index.html"
         else:
-            file_name = "tests/test_collector/notice.html"
+            file_name = "notice.html"
         with open(file_name) as file:
             return file.read()
 

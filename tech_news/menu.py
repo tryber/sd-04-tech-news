@@ -40,7 +40,7 @@ def collector_menu():
 
 
 def analyzer_menu():
-    """Seu código deve vir aqui""" 
+    """Seu código deve vir aqui"""
     menu_analyzer = input("Selecione uma das opções a seguir:\n"
                           " 1 - Buscar notícias por título;\n"
                           " 2 - Buscar notícias por data;\n"
@@ -57,7 +57,7 @@ def analyzer_menu():
         "3": "Digite a fonte:",
         "4": "Digite a categoria:",
         "5": "5",
-        "6": "6",          
+        "6": "6",     
     }
 
     functions = {
@@ -66,7 +66,7 @@ def analyzer_menu():
         "3": search_by_source,
         "4": search_by_category,
         "5": top_5_news,
-        "6": top_5_categories,      
+        "6": top_5_categories,
     }
 
     try:
@@ -76,4 +76,4 @@ def analyzer_menu():
         term = input()
         return functions[menu_analyzer](term)
     except KeyError:
-        return sys.stderr.write("Opção inválida\n")  
+        return sys.stderr.write("Opção inválida\n")

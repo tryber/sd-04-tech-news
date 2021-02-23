@@ -9,7 +9,7 @@ def csv_importer(filepath):
     try:
         with open(filepath) as file:
             reader = csv.DictReader(file, delimiter=";")
-            result = []
+            # result = []
             for row in reader:
                 reader = [row]
                 # print("Vai imprimir aqui xxxxxxxxxxxxxxxxxxxxx", row)
@@ -18,5 +18,3 @@ def csv_importer(filepath):
         raise ValueError(f"Arquivo {filepath} não encontrado")
     else:
         file.close()
-
-csv_importer("correct.csv")

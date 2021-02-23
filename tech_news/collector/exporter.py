@@ -29,6 +29,6 @@ def csv_exporter(filepath):
         for item in news:
             item["sources"] = ",".join(item["sources"])
             item["categories"] = ",".join(item["categories"])
-            writer.writerow(list(n.values()))
+            writer.writerow(list(item.values()))
 
     csv_exporter("export_correct.csv")

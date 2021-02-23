@@ -1,4 +1,5 @@
 import csv
+# from pprint import pprint
 
 
 def csv_importer(filepath):
@@ -7,9 +8,15 @@ def csv_importer(filepath):
 
     try:
         with open(filepath) as file:
-            reader = csv.reader(file, delimiter=";")
+            reader = csv.DictReader(file, delimiter=";")
+            result = []
+            for row in reader:
+                reader = [row]
+                # print("Vai imprimir aqui xxxxxxxxxxxxxxxxxxxxx", row)
             return reader
     except FileNotFoundError:
-        raise ValueError("Arquivo {filepath} não encontrado")
+        raise ValueError(f"Arquivo {filepath} não encontrado")
     else:
         file.close()
+
+csv_importer("correct.csv")

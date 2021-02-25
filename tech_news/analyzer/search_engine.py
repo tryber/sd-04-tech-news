@@ -26,14 +26,14 @@ def search_by_date(date):
 def search_by_source(source):
     result = []
     search = search_news({"sources": {"$regex": source, "$options": "i"}})
-    if len(search) == 1:
-        result.append((search[0]["title"], search[0]["url"]))
+    for new in search:
+        result.append((new["title"], new["url"]))
     return result
 
 
 def search_by_category(category):
     result = []
     search = search_news({"categories": {"$regex": category, "$options": "i"}})
-    if len(search) == 1:
-        result.append((search[0]["title"], search[0]["url"]))
+    for new in search:
+        result.append((new["title"], new["url"]))
     return result

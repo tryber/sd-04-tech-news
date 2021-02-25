@@ -20,7 +20,7 @@ def csv_exporter(filepath):
 
     with open(filepath, "w") as file:
         writer = csv.writer(file, delimiter=";")
-        writer.writerow(exact_format)
+        writer.writerow(exact_format) 
         news = find_news()
 
         for newNews in news:

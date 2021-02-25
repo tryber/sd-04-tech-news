@@ -5,8 +5,8 @@ import datetime
 def search_by_title(title):
     result = []
     search = search_news({"title": {"$regex": title, "$options": "i"}})
-    if len(search) == 1:
-        result.append((search[0]["title"], search[0]["url"]))
+    for new in search:
+        result.append((new["title"], new["url"]))
     return result
 
 

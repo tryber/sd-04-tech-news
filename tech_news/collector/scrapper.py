@@ -20,7 +20,7 @@ def scrape(fetcher, pages=1):
     new_list = []
     counter = 1
     while counter <= pages:
-        news_response = fetcher(BASE_URL + "?page={page}")
+        news_response = fetcher(BASE_URL + "?page={pages}")
         selector = Selector(text=news_response)
 
         for new in selector.css(".tec--list__item h3 a::attr(href)").getall():

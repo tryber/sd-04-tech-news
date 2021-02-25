@@ -22,7 +22,6 @@ def csv_importer(filepath):
 
             # if csv_reader != exact_format:
             #    raise ValueError("Formato invalido")
-
             content = ""
             for content in csv_reader:
                 values = [content]

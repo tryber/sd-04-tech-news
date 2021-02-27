@@ -25,20 +25,23 @@ def scrape(fetcher, pages=1):
     for i in range(1, pages + 1):
         response = fetcher(f"{URL}?pages={i}")
         selector = Selector(text=response)
-        response_news = \
-            selector.css('.tec--card__info h3 a::attr(href)').getall()
+        response_news = selector.css(
+            ".tec--card__info h3 a::attr(href)"
+        ).getall()
         for url in response_news:
             selector = Selector(text=fetcher(url))
             title = selector.css(".tec--article__header__title *::text").get()
             timestamp = selector.css("time::attr(datetime)").get()
             author = selector.css(".tec--author__info__link::text").get()
             shares_count = selector.css(".tec--toolbar__item *::text").get()
-            comments_count = \
-                selector.css("#js-comments-btn::attr(data-count)").get()
-            summary =  \
-                selector.css(".tec--article__body.z--px-16 *::text").get()
-            sources = selector.css(".z--mb-16 a::text").getall()       
-            categories = selector.css("#js-categories a::text").getall() 
+            comments_count = selector.css(
+                "#js-comments-btn::attr(data-count)"
+            ).get()
+            summary = selector.css(
+                ".tec--article__body.z--px-16 *::text"
+            ).get()
+            sources = selector.css(".z--mb-16 a::text").getall()
+            categories = selector.css("#js-categories a::text").getall()
             list_news.append(
                 {
                     "url": url,

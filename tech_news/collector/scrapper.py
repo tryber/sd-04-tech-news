@@ -27,33 +27,30 @@ def scrape(fetcher, pages=1):
         response_news = selector.css(
             ".tec--card__info h3 a::attr(href)"
         ).getall()
-        for url in response_news:
-            selector = Selector(fetcher(url))
-            title = selector.css("#js-article-title::text").get()
-            timestamp = selector.css("#js-article-date::attr(datetime)").get()
-            writer = selector.css(".tec--author__info__link::text").get()
-            shares_count = int(selector.css(".tec--toolbar__item::text").get())
-            comments_count = int(
-                selector.css("#js-comments-btn::attr(data-count)").get()
-            )
-            summary = "".join(
-                selector.css(
-                    ".tec--article__body p:first-of-type ::text"
-                ).getall()
-            )
-            sources = selector.css("div.z--mb-16 a::text").getall()
-            categories = selector.css("#js-categories a::text").getall()
-            list_news.append(
-                {
-                    "url": url,
-                    "title": title,
-                    "timestamp": timestamp,
-                    "writer": writer,
-                    "shares_count": shares_count,
-                    "comments_count": comments_count,
-                    "summary": summary,
-                    "sources": sources,
-                    "categories": categories,
-                }
-            )
+    for url in response_news:
+        selector = Selector(fetcher(url))
+        title = selector.css("#js-article-title::text").get()
+        timestamp = selector.css("#js-article-date::attr(datetime)").get()
+        writer = selector.css(".tec--author__info__link::text").get()
+        shares_count = selector.css("button::attr(data-count)").get()
+        comments_count = selector.css(".tec--btn::attr(data-count)").get()
+        summary = selector.css(".tec--article__body > p::text").get()
+        sources = selector.css(".z--mb-16 > div a::text").getall()
+        categories = selector.css("#js-categories a::text").getall()
+        list_news.append(
+            {
+                "url": url,
+                "title": title,
+                "timestamp": timestamp,
+                "writer": writer,
+                "shares_count": int(shares_count),
+                "comments_count": int(comments_count),
+                "summary": summary,
+                "sources": sources,
+                "categories": categories,
+            }
+        )
     return list_news
+
+
+# print(scrape(fetch_content))

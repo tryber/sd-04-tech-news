@@ -7,6 +7,7 @@ header = [
     "timestamp",
     "writer",
     "shares_count",
+    "comments_count",
     "summary",
     "sources",
     "categories",

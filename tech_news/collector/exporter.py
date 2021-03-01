@@ -1,17 +1,34 @@
-# import csv
-
-# from ..database import find_news
+import csv
+from tech_news import database
 
 
 def csv_exporter(filepath):
-    """Seu código deve vir aqui"""
     if not filepath.endswith(".csv"):
-        raise ValueError("Formato Invalido")
-    try:
-        with open(filepath, "w") as file:
-            print(file)
-            writer = file.write('teste')
-            print(writer)
+        raise ValueError("Formato invalido")
 
-    except FileNotFoundError:
-        raise ValueError("Formato Invalido")
+    news = database.find_news()
+
+    with open(filepath, "w") as file:
+        writer = csv.writer(file, delimiter=";")
+
+        headers = [
+            "url",
+            "title",
+            "timestamp",
+            "writer",
+            "shares_count",
+            "comments_count",
+            "summary",
+            "sources",
+            "categories",
+        ]
+        writer.writerow(headers)
+        row = []
+        for key_name in headers:
+            if type(news[0][key_name]) == list:
+                string_row = ",".join(news[0][key_name])
+                row.append(string_row)
+            else:
+                row.append(news[0][key_name])
+
+        writer.writerow(row)

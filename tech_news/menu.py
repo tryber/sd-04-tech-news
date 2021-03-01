@@ -4,4 +4,4 @@ def collector_menu():
 
 def analyzer_menu():
     """Seu código deve vir aqui"""
-#codigo aqui
+# codigo aqui

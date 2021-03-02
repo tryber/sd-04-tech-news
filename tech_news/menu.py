@@ -6,9 +6,10 @@ from tech_news.analyzer.search_engine import (
     search_by_title,
     search_by_date,
     search_by_source,
-    search_by_category,
+    # search_by_category,
 )
-from tech_news.analyzer.ratings import top_5_news, top_5_categories
+
+# from tech_news.analyzer.ratings import top_5_news, top_5_categories
 import sys
 
 
@@ -59,13 +60,13 @@ def analyzer_menu():
     elif options == "3":
         source = input("Digite a fonte: ")
         search_by_source(source)
-    elif options == "4":
-        category = input("Digita a categoria:")
-        search_by_category(category)
-    elif options == "5":
-        return top_5_news()
-    elif options == "6":
-        return top_5_categories()
+    # elif options == "4":
+    #     category = input("Digita a categoria:")
+    #     search_by_category(category)
+    # elif options == "5":
+    #     return top_5_news()
+    # elif options == "6":
+    #     return top_5_categories()
     elif options == "7":
         return print("Encerrando script")
     else:

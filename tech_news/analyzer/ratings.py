@@ -36,4 +36,3 @@ def top_5_categories():
         result.append((news["_id"]))
 
     return result
-

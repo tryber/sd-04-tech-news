@@ -6,7 +6,7 @@ def fetch_content(url, timeout=3, delay=0.5):
     print("Fetching", url)
     try:
         response = requests.get(url, timeout=timeout)
-        print(response.status_code)
+        print(response.json())
         sleep(delay)
     except response.HTTPError:
         return ""
@@ -16,5 +16,7 @@ def fetch_content(url, timeout=3, delay=0.5):
         return response.text
 
 
-def scrape(fetcher, pages=1):
-    # url = "https://www.tecmundo.com.br/novidades"
+# def scrape(fetcher, pages=1):
+#     base_url = "https://www.tecmundo.com.br/novidades"
+
+fetch_content("https://www.tecmundo.com.br/novidades")

@@ -27,3 +27,13 @@ def top_5_news():
 
 def top_5_categories():
     """Seu código deve vir aqui"""
+    data = db.news.aggregate([
+        {"$unwind": "$categories"},
+        {"$group": {"_id": "$categories", "total": {"$sum": 1}}},
+        {"$sort": {"total": -1, "_id": 1}},
+        {"$limit": 5}
+    ])
+
+    result = [x["_id"] for x in data]
+    return result
+    

@@ -16,4 +16,14 @@ def fetch_content(url, timeout=3, delay=0.5):
 
 
 def scrape(fetcher, pages=1):
-    """Seu código deve vir aqui"""
+    base_url = "https://www.tecmundo.com.br/novidades?page="
+    page_number = 1
+
+    all_news = []
+
+    while page_number <= pages:
+        content = fetcher(f"{base_url}{page_number}")
+        selector = Selector(content)
+        news_container = selector.css("div.tec--list__item")
+        for item in news_container:
+            

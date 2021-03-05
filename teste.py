@@ -1,4 +1,4 @@
-import  sys
+import sys
 
 
 num_options = ("""Escolha uma das opções abaixo:
@@ -13,7 +13,7 @@ def teste_collector():
     """Seu código deve vir aqui"""
     selected_option = {
         1: "Digite o nome do arquivo CSV a ser importado:",
-        2: "Digite o nome do arquivo CSV a ser exportado:", 
+        2: "Digite o nome do arquivo CSV a ser exportado:",
         3: "Digite a quantidade de páginas a serem raspadas:",
         4: "Encerrando Script",
         5: "Opção inválida"

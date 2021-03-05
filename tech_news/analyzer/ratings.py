@@ -36,4 +36,3 @@ def top_5_categories():
 
     result = [x["_id"] for x in data]
     return result
-    

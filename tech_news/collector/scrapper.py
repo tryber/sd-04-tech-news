@@ -25,20 +25,35 @@ def scrape(fetcher, pages=1):
         response = fetcher(BASE_URL + f"?page={page}")
         selector = Selector(text=response)
         list_items = selector.css(".tec--list__item h3 a::attr(href)").getall()
-        
+
         for url in list_items:
-            selector_item = Selector(fetcher(url))
+            response_item = fetcher(url)
+            selector_item = Selector(text=response_item)
+
             list_news.append({
                 "url": url,
-                "title": selector_item.css(".tec--article__header__title::text").get(),
-                "timestamp": selector_item.css("tec--timestamp__item time::attr(datetime)").get(),
-                "writer": selector_item.css("tec--author__info__link::text").get(),
-                "shares_count": int(selector_item.css("tec--toolbar__item::text").re_first(r"[0-9]+")),
-                "comments_count": int(selector_item.css("#js-comments-btn::text").re_first(r"[0-9]+")),
-                "summary": selector_item.css(".tec--article__body *::text").get(),
-                "sources": selector_item.css("tec--badge::text").getall(),
-                "categories": selector_item.css("js-categories a::text").getall(),
+                "title": selector_item.css(
+                    ".tec--article__header__title::text").get(),
+                "timestamp": selector_item.css(
+                    ".tec--timestamp__item time::attr(datetime)").get(),
+                "writer": selector_item.css(
+                    ".tec--author__info__link::text").get(),
+                "shares_count": 0 if not(selector_item.css(
+                    ".tec--toolbar__item::text").re_first(
+                            r"[0-9]+")) else int(selector_item.css(
+                                ".tec--toolbar__item::text").re_first(
+                                    r"[0-9]+")),
+                "comments_count": 0 if not(selector_item.css(
+                    "#js-comments-btn::text").re_first(
+                        r"[0-9]+")) else int(selector_item.css(
+                            "#js-comments-btn::text").re_first(
+                                r"[0-9]+")),
+                "summary": selector_item.css(
+                    ".tec--article__body *::text").get(),
+                "sources": selector_item.css(
+                    ".tec--badge::text").getall(),
+                "categories": selector_item.css(
+                    ".js-categories a::text").getall(),
             })
         page += 1
     return list_news
-

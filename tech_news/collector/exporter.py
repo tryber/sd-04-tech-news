@@ -13,10 +13,11 @@ HEADERS = [
     "categories"
 ]
 
-# def csv_exporter(filepath):
-#     with open(filepath, 'w') as file:
-#         writer = csv.writer(file, delimiter=";")
-#         writer.writerow(HEADERS)
-# 
-#         for news in find_news():
-#             writer.writerow()
+def csv_exporter(filepath):
+    """Seu código deve vir aqui"""
+    # with open(filepath, 'w') as file:
+    #     writer = csv.writer(file, delimiter=";")
+    #     writer.writerow(HEADERS)
+    # 
+    #     for news in find_news():
+    #         writer.writerow()

@@ -21,7 +21,7 @@ def csv_exporter(filepath):
                 "categories",
             ]
 
-        writer = csv.writer(file, delimiter=";")
+        writer = csv.writer(file, delimiter=";", fieldnames=headers)
         # https://docs.python.org/pt-br/3/library/csv.html#csv.csvwriter.writerow
         writer.writerow(headers)
         noticias = find_news()

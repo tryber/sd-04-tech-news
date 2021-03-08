@@ -41,19 +41,19 @@ def collector_menu():
 
     option = input(texto)
 
-    if int(option) not in {1, 2, 3, 4}:
+    if int(float(option)) not in {1, 2, 3, 4}:
         return print(options[5])
 
-    if int(option) == 4:
+    if int(float(option)) == 4:
         return print('Encerrando script')
 
-    aux = options[int(option)]
+    aux = options[int(float(option))]
     entry = input(aux)
     # return print(entry)
 
-    result = funcs[int(option)](entry)
+    result = funcs[int(float(option))](entry)
 
-    if int(option) in {1, 3}:
+    if int(float(option)) in {1, 3}:
         create_news(result)
         return True
 
@@ -91,20 +91,20 @@ def analyzer_menu():
 
     option = input(texto)
 
-    if int(option) not in {1, 2, 3, 4, 5, 6, 7}:
+    if int(float(option)) not in {1, 2, 3, 4, 5, 6, 7}:
         return print(options[8], file=sys.stderr)
 
-    if int(option) == 7:
+    if int(float(option)) == 7:
         return print('Encerrando script')
 
-    if int(option) in {1, 2, 3, 4}:
-        aux = options[int(option)]
+    if int(float(option)) in {1, 2, 3, 4}:
+        aux = options[int(float(option))]
         entry = input(aux)
-        result = funcs[int(option)](entry)
+        result = funcs[int(float(option))](entry)
     else:
-        result = options[int(option)]()
+        result = options[int(float(option))]()
 
     return print(result)
 
 
-# collector_menu()
+collector_menu()

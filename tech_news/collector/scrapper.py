@@ -4,7 +4,7 @@ from time import sleep
 
 
 def fetch_content(url, timeout=3, delay=0.5):
-     time.sleep(delay)
+    time.sleep(delay)
     try:
         resp = requests.get(url, timeout=timeout)
         resp.raise_for_status()

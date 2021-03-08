@@ -13,4 +13,4 @@ def csv_importer(filepath):
                 aux = item
                 return [aux]
     except FileNotFoundError:
-        raise ("Arquivo tests/file_not_exist.csv não encontrado")  #comitando
+        raise ("Arquivo tests/file_not_exist.csv não encontrado")

@@ -13,6 +13,13 @@ def fetch_content(url, timeout=3, delay=0.5):
         return ""
     else:
         return resp.text
+    '''
+    resp = requests.get(url, timeout=timeout)
+    if resp.status_code != 200:
+        return ""
+    time.sleep(delay)
+    return resp.text
+    '''
 
 
 def scrape(fetcher, pages=1):

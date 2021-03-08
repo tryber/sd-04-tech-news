@@ -29,8 +29,12 @@ def search_by_date(date):
 
 
 def search_by_source(source):
-    """Seu código deve vir aqui"""
-
+    result = []
+    search_result = search_news({"sources": {"$all": [re.compile(source, re.IGNORECASE)]}})
+    
+    for news in search_result:
+        result.append((news["title"], news["url"]))
+    return result
 
 def search_by_category(category):
     """Seu código deve vir aqui"""

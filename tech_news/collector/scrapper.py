@@ -42,7 +42,7 @@ def new_object(url, selector):
     }
 
 
-def scrape(fetcher=fetch_content, pages=1): # testando retorno
+def scrape(fetcher=fetch_content, pages=1):  # testando retorno
     new_list = []
     for page in range(1, pages + 1):
         new_resp = fetcher(

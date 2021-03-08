@@ -23,7 +23,7 @@ def search_by_date(date):
         for news in search_result:
             result.append((news["title"], news["url"]))
     except ValueError:
-        raise ValueError("Data inválida")    
+        raise ValueError("Data inválida")  
     else:
         return result
 
@@ -41,7 +41,9 @@ def search_by_source(source):
 
 def search_by_category(category):
     result = []
-    search_result = search_news({"categories": {"$all": [re.compile(category, re.IGNORECASE)]}})
+    search_result = search_news(
+        {"categories": {"$all": [re.compile(category, re.IGNORECASE)]}}
+    )
 
     for news in search_result:
         result.append((news["title"], news["url"]))

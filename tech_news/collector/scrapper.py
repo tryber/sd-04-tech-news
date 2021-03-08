@@ -52,8 +52,8 @@ def scrape(fetcher=fetch_content, pages=1):  # testando retorno
         for new in new_selector.css(
             ".tec--list__item .tec--card__title__link::attr(href)"
         ).getall():
-            new_resp = fetcher(new)
-            new_selector = Selector(text=new_resp)
-            new_obj = new_object(new, new_resp)
+            resp_new = fetcher(new)
+            selector_new = Selector(text=resp_new)
+            new_obj = new_object(new, selector_new)
             new_list.append(new_obj)
     return new_list

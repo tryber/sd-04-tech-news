@@ -5,7 +5,7 @@ def csv_importer(filepath):
     """retorna erro se nao existir ou se a extensão for invalida"""
     if not filepath.endswith(".csv"):
         raise ValueError("Formato invalido")
-    """faz a leitura delimitando por " ; " retornando exception caso não exista item"""
+    """leitura, delimitando e retornando exception caso não exista item"""
     try:
         with open(filepath) as file:
             filepath_teste = csv.DictReader(file, delimiter=";")

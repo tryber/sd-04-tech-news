@@ -7,9 +7,11 @@ from parsel import Selector
 def fetch_content(url, timeout=3, delay=0.5):
     time.sleep(delay)
     try:
+        """ req tipo GET com pausa de 0.5"""
         resp = requests.get(url, timeout=timeout)
         resp.raise_for_status()
         sleep(delay)
+        """ joga pra fora da pila em caso de erro"""
     except (requests.exceptions.HTTPError, requests.exceptions.ReadTimeout):
         return ""
     else:

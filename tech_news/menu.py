@@ -40,8 +40,8 @@ def collector_menu():
     }
 
     option = input(texto)
-    print(type(option))
-    print(option)
+    # print(type(option))
+    # print(option)
     # aux2 = int(option)
     # print(type(aux2))
     # print(aux2)

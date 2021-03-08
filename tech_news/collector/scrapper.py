@@ -54,6 +54,6 @@ def scrape(fetcher=fetch_content, pages=1):
         ).getall():
             new_resp = fetcher(new)
             new_selector = Selector(text=new_resp)
-            new_obj = format_new_object(new, new_resp)
+            new_obj = new_object(new, new_resp)
             new_list.append(new_obj)
     return new_list

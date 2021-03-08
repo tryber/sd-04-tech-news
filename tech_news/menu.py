@@ -20,10 +20,10 @@ def scrap(num):
 def collector_menu():
 
     texto = """Selecione uma das opções a seguir:
-              1 - Importar notícias a partir de um arquivo CSV;
-              2 - Exportar notícias para CSV;
-              3 - Raspar notícias online;
-              4 - Sair."""
+1 - Importar notícias a partir de um arquivo CSV;
+2 - Exportar notícias para CSV;
+3 - Raspar notícias online;
+4 - Sair."""
 
     options = {
         1: "Digite o nome do arquivo CSV a ser importado:",
@@ -67,13 +67,13 @@ def collector_menu():
 def analyzer_menu():
 
     texto = """Selecione uma das opções a seguir:
-            1 - Buscar notícias por título;
-            2 - Buscar notícias por data;
-            3 - Buscar notícias por fonte;
-            4 - Buscar notícias por categoria;
-            5 - Listar top 5 notícias;
-            6 - Listar top 5 categorias;
-            7 - Sair."""
+1 - Buscar notícias por título;
+2 - Buscar notícias por data;
+3 - Buscar notícias por fonte;
+4 - Buscar notícias por categoria;
+5 - Listar top 5 notícias;
+6 - Listar top 5 categorias;
+7 - Sair."""
 
     options = {
         1: "Digite o título:",

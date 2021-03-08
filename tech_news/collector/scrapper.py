@@ -42,5 +42,18 @@ def new_object(url, selector):
     }
 
 
-def scrape(fetcher, pages=1):
-    """Seu código deve vir aqui"""
+def scrape(fetcher=fetch_content, pages=1):
+    new_list = []
+    for page in range(1, pages + 1):
+        new_resp = fetcher(
+            f"https://www.tecmundo.com.br/novidades?page={page}"
+        )
+        new_selector = Selector(text=new_resp)
+        for new in new_selector.css(
+            ".tec--list__item .tec--card__title__link::attr(href)"
+        ).getall():
+            new_resp = fetcher(new)
+            new_selector = Selector(text=new_resp)
+            new_obj = format_new_object(new, new_resp)
+            new_list.append(new_obj)
+    return new_list

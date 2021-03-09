@@ -19,17 +19,10 @@ def menu_itens(option):
         return search_by_date(input("Digite a data no formato aaaa-mm-dd:"))
     elif option == "3":
         return search_by_source(input("Digite a fonte:"))
-    elif option == "4":
-        return search_by_category(input("Digite a categoria:"))
-    elif option == "5":
-        return top_5_news()
-    elif option == "6":
-        return top_5_categories()
-    elif option == "7":
-        return print("Encerrando script")
     else:
-        return print("Opção inválida", file=sys.stderr)
+        return search_by_category(input("Digite a categoria:"))
     
+
 
 def collector_menu():
     option = input("""Selecione uma das opções a seguir:
@@ -67,4 +60,13 @@ def analyzer_menu():
         "7 - Sair.\n "
     )
 
-    menu_itens(option)
+    if option == ("1" or "2" or "3" or "4"):
+        menu_itens(option)
+    elif option == "5":
+        return top_5_news()
+    elif option == "6":
+        return top_5_categories()
+    elif option == "7":
+        return print("Encerrando script")
+    else:
+        return print("Opção inválida", file=sys.stderr)

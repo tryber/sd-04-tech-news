@@ -1,9 +1,29 @@
+from tech_news.database import search_news
+from datetime import datetime
+
+
+def convert_to_tuples(data):
+    if data == []:
+        return []
+    news_container = []
+    for news in news_container:
+        news_container.append((news["title"], news["url"]))
+    return news_container
+
+
 def search_by_title(title):
-    """Seu código deve vir aqui"""
+    news = search_news({"title": {"$regex": title, "$options": "-i"}})
+    return convert_to_tuples(news)
 
 
 def search_by_date(date):
-    """Seu código deve vir aqui"""
+    try:
+        newDate = datetime.strptime(date, "%Y-%m-%d")
+        print(newDate)
+        news = search_news({"timestamp": {"$regex": date, "$options": "i"}})
+        return convert_to_tuples(news)
+    except ValueError:
+        raise ValueError("Data esta inválida")
 
 
 def search_by_source(source):

@@ -112,5 +112,5 @@ def analyzer_menu():
 
     return print(result)
 
-
-collector_menu()
+if __name__ == '__main__':
+    collector_menu()

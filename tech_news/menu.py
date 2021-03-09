@@ -30,7 +30,7 @@ def collector_menu():
         2: "Digite o nome do arquivo CSV a ser exportado:",
         3: "Digite a quantidade de páginas a serem raspadas:",
         4: "Encerrando script",
-        5: "Opção inválida",
+        5: " - Opção inválida",
      }
 
     funcs = {

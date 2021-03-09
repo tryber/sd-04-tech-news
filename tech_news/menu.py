@@ -12,18 +12,6 @@ from tech_news.analyzer.ratings import top_5_news, top_5_categories
 import sys
 
 
-def menu_itens(option):
-    if option == "1":
-        return search_by_title(input("Digite o título:"))
-    elif option == "2":
-        return search_by_date(input("Digite a data no formato aaaa-mm-dd:"))
-    elif option == "3":
-        return search_by_source(input("Digite a fonte:"))
-    else:
-        return search_by_category(input("Digite a categoria:"))
-    
-
-
 def collector_menu():
     option = input("""Selecione uma das opções a seguir:
         1 - Importar notícias a partir de um arquivo CSV;
@@ -48,6 +36,26 @@ def collector_menu():
         return print("Opção inválida", file=sys.stderr)
 
 
+def option_one():
+    return search_by_title(input("Digite o título:"))
+
+
+def option_two():
+    return search_by_date(input("Digite a data no formato aaaa-mm-dd:"))
+
+
+def option_three():
+    return search_by_source(input("Digite a fonte:"))
+
+
+def option_four():
+    return search_by_category(input("Digite a categoria:"))
+
+
+def option_seven():
+    print("Encerrando script")
+
+
 def analyzer_menu():
     option = input(
         "Selecione uma das opções a seguir:\n "
@@ -60,13 +68,17 @@ def analyzer_menu():
         "7 - Sair.\n "
     )
 
-    if option == ("1" or "2" or "3" or "4"):
-        menu_itens(option)
-    elif option == "5":
-        return top_5_news()
-    elif option == "6":
-        return top_5_categories()
-    elif option == "7":
-        return print("Encerrando script")
-    else:
-        return print("Opção inválida", file=sys.stderr)
+    menu = {
+        1: option_one,
+        2: option_two,
+        3: option_three,
+        4: option_four,
+        5: top_5_news,
+        6: top_5_categories,
+        7: option_seven,
+    }
+    
+    try:
+        return menu[int(option)]()
+    except KeyError:
+        print("Opção inválida", file=sys.stderr)

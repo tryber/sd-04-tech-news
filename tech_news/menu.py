@@ -12,13 +12,32 @@ from tech_news.analyzer.ratings import top_5_news, top_5_categories
 import sys
 
 
+def menu_itens(option):
+    if option == "1":
+        return search_by_title(input("Digite o título:"))
+    elif option == "2":
+        return search_by_date(input("Digite a data no formato aaaa-mm-dd:"))
+    elif option == "3":
+        return search_by_source(input("Digite a fonte:"))
+    elif option == "4":
+        return search_by_category(input("Digite a categoria:"))
+    elif option == "5":
+        return top_5_news()
+    elif option == "6":
+        return top_5_categories()
+    elif option == "7":
+        return print("Encerrando script")
+    else:
+        return print("Opção inválida", file=sys.stderr)
+    
+
 def collector_menu():
     option = input("""Selecione uma das opções a seguir:
         1 - Importar notícias a partir de um arquivo CSV;
         2 - Exportar notícias para CSV;
         3 - Raspar notícias online;
         4 - Sair.""")
-    
+
     if option == "1":
         file = input("Digite o nome do arquivo CSV a ser importado:")
         action = csv_importer(file)
@@ -48,19 +67,4 @@ def analyzer_menu():
         "7 - Sair.\n "
     )
 
-    if option == "1":
-        return search_by_title(input("Digite o título:"))
-    elif option == "2":
-        return search_by_date(input("Digite a data no formato aaaa-mm-dd:"))
-    elif option == "3":
-        return search_by_source(input("Digite a fonte:"))
-    elif option == "4":
-        return search_by_category(input("Digite a categoria:"))
-    elif option == "5":
-        return top_5_news()
-    elif option == "6":
-        return top_5_categories()
-    elif option == "7":
-        return print("Encerrando script")
-    else:
-        return print("Opção inválida", file=sys.stderr)
+    menu_itens(option)

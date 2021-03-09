@@ -30,8 +30,8 @@ def collector_menu():
         2: "Digite o nome do arquivo CSV a ser exportado:",
         3: "Digite a quantidade de páginas a serem raspadas:",
         4: "Encerrando script",
-        5: " - Opção inválida",
-     }
+        5: "Opção inválida"
+    }
 
     funcs = {
         1: csv_importer,
@@ -46,7 +46,7 @@ def collector_menu():
     # print(type(aux2))
     # print(aux2)
     if option not in {'1', '2', '3', '4'}:
-        return print(options[5])
+        return print(options[5], file=sys.stderr)
 
     if int(option) == 4:
         return print('Encerrando script')
@@ -81,7 +81,7 @@ def analyzer_menu():
         3: "Digite a fonte:",
         4: "Digite a categoria:",
         7: "Encerrando script",
-        8: " - Opção inválida",
+        8: "Opção inválida"
     }
 
     funcs = {
@@ -106,10 +106,13 @@ def analyzer_menu():
         entry = input(aux)
         result = funcs[int(option)](entry)
     else:
-        result = options[int(option)]()
+        # print(option)
+        # print(options[int(option)])
+        result = funcs[int(option)]()
 
     return print(result)
 
 
 if __name__ == '__main__':
-    collector_menu()
+    # collector_menu()
+    analyzer_menu()

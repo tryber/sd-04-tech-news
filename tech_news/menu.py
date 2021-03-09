@@ -77,7 +77,7 @@ def analyzer_menu():
         6: top_5_categories,
         7: option_seven,
     }
-    
+
     try:
         return menu[int(option)]()
     except KeyError:

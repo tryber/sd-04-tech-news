@@ -20,6 +20,7 @@ def scrap(num):
 def collector_menu():
 
     texto = """Selecione uma das opções a seguir:
+
 1 - Importar notícias a partir de um arquivo CSV;
 2 - Exportar notícias para CSV;
 3 - Raspar notícias online;
@@ -67,6 +68,7 @@ def collector_menu():
 def analyzer_menu():
 
     texto = """Selecione uma das opções a seguir:
+
 1 - Buscar notícias por título;
 2 - Buscar notícias por data;
 3 - Buscar notícias por fonte;
@@ -111,4 +113,4 @@ def analyzer_menu():
     return print(result)
 
 
-# collector_menu()
+collector_menu()

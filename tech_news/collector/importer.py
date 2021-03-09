@@ -1,2 +1,15 @@
+import csv
+
+
 def csv_importer(filepath):
-    """Seu código deve vir aqui"""
+    if not filepath.endswith(".csv"):
+        raise ValueError("Formato inválido")
+    try:
+        with open(filepath) as file:
+            content_reader = csv.DictReader(file, delimiter=";")
+            content = ""
+            for content in content_reader:
+                content_values = content
+                return [content_values]
+    except FileNotFoundError:
+        raise ValueError(f"Arquivo {filepath} não encontrado")

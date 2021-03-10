@@ -12,7 +12,7 @@ def csv_importer(filepath):
             news_reader = csv.DictReader(file, delimiter=";")
             print(news_reader.fieldnames)
             for row in news_reader:
-                result.append(row)
+                results.append(row)
             return results
     except FileNotFoundError:
         raise ValueError("Arquivo tests/file_not_exist.csv não encontrado")

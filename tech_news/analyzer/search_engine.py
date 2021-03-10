@@ -1,5 +1,21 @@
+from pymongo import MongoClient
+client = MongoClient()
+
+
+def find_news():
+    db = client.tech_news
+    data = db.news.find({}, {"_id": 0})
+    return data
+
+
 def search_by_title(title):
-    """Seu código deve vir aqui"""
+    data = find_news()
+    results = []
+    for new in data:
+        if title.lower() in new["title"].lower():
+            results.append((new["title"], new["url"]))
+
+    return results
 
 
 def search_by_date(date):

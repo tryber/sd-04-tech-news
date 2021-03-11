@@ -10,6 +10,7 @@ from tech_news.analyzer.search_engine import (
     search_by_title,
     search_news
 )
+from tech_news.database import create_news
 
 
 def collector_menu():
@@ -21,13 +22,15 @@ def collector_menu():
         " 4 - Sair.")
     if choice == "1":
         filepath = input("Digite o nome do arquivo CSV a ser importado:")
-        csv_importer(filepath)
+        new_file = csv_importer(filepath)
+        create_news(new_file)
     elif choice == "2":
         filepath = input("Digite o nome do arquivo CSV a ser exportado:")
         csv_exporter(filepath)
     elif choice == "3":
         pages = input("Digite a quantidade de páginas a serem raspadas:")
-        scrape(scrapper.fetch_content, pages)
+        new_file = scrape(fetcher=fetch_content, pages=int(pages))
+        create_news(new_file)
     elif choice == "4":
         return print("Encerrando script")
     else:

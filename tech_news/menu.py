@@ -55,13 +55,13 @@ def analyzer_menu():
     elif choice == "3":
         source = input("Digite a fonte:")
         search_by_source(source)
-    elif choice == "4":
-        category = input("Digite a categoria:")
-        search_by_category(category)
-    elif choice == "5":
-        top_5_news()
-    elif choice == "6":
-        top_5_categories()
+    # elif choice == "4":
+    #     category = input("Digite a categoria:")
+    #     search_by_category(category)
+    # elif choice == "5":
+    #     top_5_news()
+    # elif choice == "6":
+    #     top_5_categories()
     elif choice == "7":
         return print("Encerrando script")
     else:

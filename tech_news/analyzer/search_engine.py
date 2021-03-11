@@ -1,3 +1,4 @@
+import datetime
 from pymongo import MongoClient
 client = MongoClient()
 
@@ -19,7 +20,12 @@ def search_by_title(title):
 
 
 def search_by_date(date):
-    """Seu código deve vir aqui"""
+    format = "%Y-%m-%d"
+    try:
+        datetime.datetime.strptime(date, format)
+    except ValueError:
+        raise ValueError("Data inválida")
+
     data = find_news()
     results = []
     for new in data:
@@ -34,7 +40,7 @@ def search_by_source(source):
     results = []
     for new in data:
         new["sources"] = map(lambda x: x.lower(), new["sources"])
-        if source in new["sources"]:
+        if source.lower() in new["sources"]:
             results.append((new["title"], new["url"]))
 
     return results

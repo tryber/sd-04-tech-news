@@ -14,7 +14,7 @@ def search_by_title(title):
 def search_by_date(date):
     """Busca noticia pela data se nao existir retorna um list vazia"""
     try:
-        datetime.datetime.strftime(date, "%y-%m-%d")
+        datetime.datetime.strftime(date, "%Y-%m-%d")
     except ValueError:
         raise ValueError("Data inválida")
     else:

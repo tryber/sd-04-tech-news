@@ -15,19 +15,26 @@ def search_by_date(date):
     """Busca noticia pela data se nao existir retorna um list vazia"""
     try:
         datetime.strptime(date, "%Y-%m-%d")
-        data = search_news({"timestamp": {"$regex": date}})
-        if data == []:
+        info = search_news({"timestamp": {"$regex": date}})
+        if info == []:
             return []
         new_list = []
-        for item in data:
-            new_list.append((item["title"], item["url"]))
+        for new in info:
+            new_list.append((new["title"], new["url"]))
         return new_list
     except ValueError:
         raise ValueError("Data inválida")
 
 
 def search_by_source(source):
-    """Seu código deve vir aqui"""
+    """Busca noticia pela fonte se nao existir retorna um list vazia"""
+    new_list = []
+    info = search_news({"sources": {"$regex": source, "$options": "i"}})
+    if info == []:
+        return []
+    for new in info:
+        new_list.append((new["title"], new["url"]))
+    return new_list
 
 
 def search_by_category(category):

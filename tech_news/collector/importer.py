@@ -7,7 +7,7 @@ def csv_importer(filepath):
     try:
         csv_file = open(filepath)
     except FileNotFoundError:
-        return ValueError(f"Arquivo {filepath} não encontrado")
+        raise ValueError(f"Arquivo {filepath} não encontrado")
     else:
         read_content = csv.DictReader(csv_file, delimiter=";")
         for content in read_content:

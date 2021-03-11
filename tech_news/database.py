@@ -30,5 +30,5 @@ def search_news(query):
 
 
 def search_news_agregationsbd(query):
-    '''requisito 10'''
+    '''requisito 9 e 10'''
     return list(db.news.aggregate(query))

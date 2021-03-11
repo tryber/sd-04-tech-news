@@ -2,6 +2,11 @@ from tech_news.collector.importer import csv_importer
 from tech_news.collector.exporter import csv_exporter
 from tech_news.collector.scrapper import scrape, fetch_content
 from tech_news.database import create_news
+from tech_news.analyzer.search_engine import (
+    search_by_title,
+    search_by_date,
+    search_by_source,
+)
 import sys
 
 
@@ -45,13 +50,14 @@ def analyzer_menu():
     )
 
     if menu == "1":
-        input("Digite o título: ")
+        titulo = input("Digite o título: ")
+        search_by_title(titulo)
     elif menu == "2":
-        input("Digite a data no formato aaaa-mm-dd: ")
+        data = input("Digite a data no formato aaaa-mm-dd: ")
+        search_by_date(data)
     elif menu == "3":
-        input("Digite a fonte: ")
-    elif menu == "4":
-        input("Digite a categoria:")
+        fonte = input("Digite a fonte: ")
+        search_by_source(fonte)
     elif menu == "7":
         return print("Encerrando script")
     else:

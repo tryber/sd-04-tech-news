@@ -38,4 +38,11 @@ def search_by_source(source):
 
 
 def search_by_category(category):
-    """Seu código deve vir aqui"""
+    """Busca noticia pela categoria se nao existir retorna um list vazia"""
+    new_list = []
+    info = search_news({"categories": {"$regex": category, "$options": "i"}})
+    if info == []:
+        return []
+    for new in info:
+        new_list.append((new["title"], new["url"]))
+    return new_list

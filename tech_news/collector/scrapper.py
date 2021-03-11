@@ -44,7 +44,6 @@ def scrape_news(url, selector):
     }
 
 
-
 def scrape(fetcher, pages=1):
     news_object = []
     for page in range(1, pages + 1):

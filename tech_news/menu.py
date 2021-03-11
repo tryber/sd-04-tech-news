@@ -33,4 +33,26 @@ def collector_menu():
 
 
 def analyzer_menu():
-    """Seu código deve vir aqui"""
+    menu = input(
+        "Selecione uma das opções a seguir:\n "
+        "1 - Buscar notícias por título;\n "
+        "2 - Buscar notícias por data;\n "
+        "3 - Buscar notícias por fonte;\n "
+        "4 - Buscar notícias por categoria;\n "
+        "5 - Listar top 5 notícias;\n "
+        "6 - Listar top 5 categorias;\n "
+        "7 - Sair.\n "
+    )
+
+    if menu == "1":
+        input("Digite o título: ")
+    elif menu == "2":
+        input("Digite a data no formato aaaa-mm-dd: ")
+    elif menu == "3":
+        input("Digite a fonte: ")
+    elif menu == "4":
+        input("Digite a categoria:")
+    elif menu == "7":
+        return print("Encerrando script")
+    else:
+        return print("Opção inválida", file=sys.stderr)

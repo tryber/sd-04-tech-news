@@ -14,7 +14,6 @@ def fetch_content(url, timeout=3, delay=0.5):
         return response.text
 
 
-
 URL_BASE = "https://www.tecmundo.com.br/novidades"
 
 

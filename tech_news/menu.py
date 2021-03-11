@@ -14,22 +14,21 @@ from tech_news.analyzer.search_engine import (
 
 def collector_menu():
     choice = input(
-        """Selecione uma das opções a seguir:\n\n
-
-        1 - Importar notícias a partir de um arquivo CSV;\n
-        2 - Exportar notícias para CSV;\n
-        3 - Raspar notícias online;\n
-        4 - Sair.""")
-    if int(choice) == 1:
+        "Selecione uma das opções a seguir:\n"
+        " 1 - Importar notícias a partir de um arquivo CSV;\n"
+        " 2 - Exportar notícias para CSV;\n"
+        " 3 - Raspar notícias online;\n"
+        " 4 - Sair.")
+    if choice == "1":
         filepath = input("Digite o nome do arquivo CSV a ser importado:")
-        importer.csv_importer(filepath)
-    elif int(choice) == "2":
+        csv_importer(filepath)
+    elif choice == "2":
         filepath = input("Digite o nome do arquivo CSV a ser exportado:")
-        exporter.csv_exporter(filepath)
-    elif int(choice) == 3:
+        csv_exporter(filepath)
+    elif choice == "3":
         pages = input("Digite a quantidade de páginas a serem raspadas:")
-        scrapper.scrape(scrapper.fetch_content, pages)
-    elif int(choice) == 4:
+        scrape(scrapper.fetch_content, pages)
+    elif choice == "4":
         return print("Encerrando script")
     else:
         return print("Opção inválida", file=sys.stderr)
@@ -38,32 +37,31 @@ def collector_menu():
 def analyzer_menu():
 
     choice = input(
-        """Selecione uma das opções a seguir:\n\n
-
-        1 - Buscar notícias por título;\n
-        2 - Buscar notícias por data;\n
-        3 - Buscar notícias por fonte;\n
-        4 - Buscar notícias por categoria;\n
-        5 - Listar top 5 notícias;\n
-        6 - Listar top 5 categorias;\n
-        7 - Sair.""")
-    if int(choice) == 1:
+        "Selecione uma das opções a seguir:\n"
+        " 1 - Buscar notícias por título;\n"
+        " 2 - Buscar notícias por data;\n"
+        " 3 - Buscar notícias por fonte;\n"
+        " 4 - Buscar notícias por categoria;\n"
+        " 5 - Listar top 5 notícias;\n"
+        " 6 - Listar top 5 categorias;\n"
+        " 7 - Sair.""")
+    if choice == "1":
         title = input("Digite o título:")
         search_by_title(title)
-    elif int(choice) == 2:
+    elif choice == "2":
         date = input("Digite a data no formato aaaa-mm-dd::")
         search_by_date(date)
-    elif int(choice) == 3:
+    elif choice == "3":
         source = input("Digite a fonte:")
         search_by_source(source)
-    elif int(choice) == 4:
+    elif choice == "4":
         category = input("Digite a categoria:")
         search_by_category(category)
-    elif int(choice) == 5:
+    elif choice == "5":
         top_5_news()
-    elif int(choice) == 6:
+    elif choice == "6":
         top_5_categories()
-    elif int(choice) == 7:
+    elif choice == "7":
         return print("Encerrando script")
     else:
         return print("Opção inválida", file=sys.stderr)

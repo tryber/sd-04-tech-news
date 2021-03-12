@@ -1,4 +1,4 @@
-from tech_news.analyzer.search_engine import convert_to_tuples
+""" from tech_news.analyzer.search_engine import convert_to_tuples
 from tech_news.database import search_news_with_agregations
 
 
@@ -33,3 +33,4 @@ def top_5_categories():
     for news in data:
         categories.append((news["_id"]))
     return categories
+ """

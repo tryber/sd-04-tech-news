@@ -7,8 +7,8 @@ def fetch_content(url, timeout=3, delay=0.5):
     try:
         print("fetching content", url)
         response = requests.get(url, timeout=timeout)
-        sleep(delay)
         response.raise_for_status()
+        sleep(delay)
     except (requests.HTTPError, requests.ReadTimeout):
         return ""
     else:

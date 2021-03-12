@@ -32,5 +32,5 @@ def csv_exporter(filepath):
 
         content = data_treatment_list()
 
-    writer.writeheader()
-    writer.writerows(content)
+        writer.writeheader()
+        writer.writerows(content)

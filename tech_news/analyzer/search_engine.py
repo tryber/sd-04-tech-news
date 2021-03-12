@@ -12,16 +12,17 @@ def convert_to_tuples(data):
 
 
 def search_by_title(title):
-    news = search_news({"title": {"$regex": title, "$options": "-i"}})
+    news = search_news({"title": {"$regex": title, "$options": "i"}})
     return convert_to_tuples(news)
 
 
 def search_by_date(date):
     try:
-        newDate = datetime.strptime(date, "%Y-%m-%d")
-        print(newDate)
-        news = search_news({"timestamp": {"$regex": date, "$options": "i"}})
-        return convert_to_tuples(news)
+        if datetime.strptime(date, "%Y-%m-%d"):
+            news_data = search_news(
+                {"timestamp": {"$regex": date, "$options": "i"}}
+            )
+            return convert_to_tuples(news_data)
     except ValueError:
         raise ValueError("Data inválida")
 

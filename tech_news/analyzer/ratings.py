@@ -1,9 +1,9 @@
-""" from tech_news.analyzer.search_engine import convert_to_tuples
-from tech_news.database import search_news_with_agregations
+from tech_news.analyzer.search_engine import convert_to_tuples
+from tech_news.database import search_news_agrregations
 
 
 def top_5_news():
-    news = search_news_with_agregations(
+    news = search_news_agrregations(
         [
             {
                 "$addFields": {
@@ -22,7 +22,7 @@ def top_5_news():
 
 def top_5_categories():
     categories = []
-    data = search_news_with_agregations(
+    data = search_news_agrregations(
         [
             {"$unwind": "$categories"},
             {"$group": {"_id": "$categories", "count": {"$sum": 1}}},
@@ -33,4 +33,3 @@ def top_5_categories():
     for news in data:
         categories.append((news["_id"]))
     return categories
- """

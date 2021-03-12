@@ -23,7 +23,7 @@ def search_by_date(date):
         news = search_news({"timestamp": {"$regex": date, "$options": "i"}})
         return convert_to_tuples(news)
     except ValueError:
-        raise ValueError("Data esta inválida")
+        raise ValueError("Data inválida")
 
 
 def search_by_source(source):

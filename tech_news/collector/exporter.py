@@ -26,7 +26,7 @@ def data_treatment_list():
 
 def csv_exporter(filepath):
     if not filepath.endswith(".csv"):
-        raise ValueError("Formato inválido")
+        raise ValueError("Formato invalido")
     with open(filepath, "w") as file:
         writer = csv.DictWriter(file, fieldnames=headers, delimiter=";")
 

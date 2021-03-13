@@ -5,10 +5,10 @@ def csv_importer(filepath):
     if not filepath.endswith(".csv"):
         raise ValueError("Formato invalido")
     try:
-        with open(filepath) as file:
-            filepath_teste = csv.DictReader(file, delimiter=";")
-            for item in filepath_teste:
-                aux = item
-                return [aux]
+        with open(filepath, 'r') as file:
+            data = csv.DictReader(file, delimiter=";")
+            for row in data:
+                return [row]
+
     except FileNotFoundError:
-        raise ValueError("Arquivo {filepath} não encontrado")
+        raise ValueError(f"Arquivo {filepath} não encontrado")

@@ -2,7 +2,7 @@ import requests
 import time
 
 def fetch_content(url, timeout=3, delay=0.5):
- try:
+    try:
         response = requests.get(url, timeout=timeout)
         time.sleep(delay)
     except requests.ReadTimeout:

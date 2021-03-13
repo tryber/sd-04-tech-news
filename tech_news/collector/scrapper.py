@@ -8,7 +8,7 @@ def fetch_content(url, timeout=3, delay=0.5):
         response = requests.get(url, timeout=timeout)
         response.raise_for_status()
         sleep(delay)
-    except (requests.exceptions.HTTPError, requests.exceptions.ReadTimeout):
+    except requests.exceptions.RequestException:
         return ""
     else:
         return response.text
@@ -38,20 +38,24 @@ def scrape(fetcher, pages=1):
                     "writer": selector_url.css(
                         ".tec--author__info__link::text"
                         ).get(),
-                    "shares_count": selector_url.css(
-                        ".tec--toolbar__item::text"
-                        ).re_first(r"[0-9]+"),
-                    "comments_count": selector_url.css(
-                        "#js-comments-btn::text"
-                        ).re_first(r"[0-9]+"),
+                    "shares_count": int(
+                        selector_url.css(
+                            ".tec--toolbar__item::text").re_first(r"[0-9]+")
+                        ),
+                    "comments_count": int(
+                        selector_url.css(
+                            "#js-comments-btn::text").re_first(r"[0-9]+")
+                        ),
                     "summary": selector_url.css(
                         ".tec--article__body > p::text"
                         ).get(),
-                    "sources": selector_url.css("div.z--mb-16 .tec--badge::text").getall(),
+                    "sources": selector_url.css(
+                        "div.z--mb-16 .tec--badge::text"
+                        ).getall(),
                     "categories": selector_url.css(
                         "#js-categories a::text"
                         ).getall(),
                 }
             )
-    count += 1
+        count += 1
     return news

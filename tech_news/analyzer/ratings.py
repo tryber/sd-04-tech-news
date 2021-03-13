@@ -1,4 +1,5 @@
-from tech_news.database import db, client 
+from tech_news.database import db, client
+
 
 def top_5_news():
     results = []

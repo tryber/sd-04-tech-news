@@ -29,9 +29,11 @@ def scrape(fetcher, pages=1):
             news.append(
                 {
                     "url": url,
-                    "title": selector_url.css(".tec--article__header__title::text").get(),
+                    "title": selector_url.css(
+                        ".tec--article__header__title::text"
+                        ).get(),
                     "timestamp": selector_url.css(
-                        ".tec--timestamp__item time::attr(datetime)"
+                        "#js-article-date::attr(datetime)"
                         ).get(),
                     "writer": selector_url.css(
                         ".tec--author__info__link::text"
@@ -43,9 +45,9 @@ def scrape(fetcher, pages=1):
                         "#js-comments-btn::text"
                         ).re_first(r"[0-9]+"),
                     "summary": selector_url.css(
-                        ".tec--article__body *::text"
+                        ".tec--article__body > p::text"
                         ).get(),
-                    "sources": selector_url.css(".z--mb-16 a::text").getall(),
+                    "sources": selector_url.css("div.z--mb-16 .tec--badge::text").getall(),
                     "categories": selector_url.css(
                         "#js-categories a::text"
                         ).getall(),

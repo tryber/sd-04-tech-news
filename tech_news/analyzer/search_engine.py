@@ -1,6 +1,5 @@
-from tech_news.database import search_news
-import re
 from datetime import datetime
+from tech_news.database import search_news
 
 
 def search_by_title(title):
@@ -12,36 +11,34 @@ def search_by_title(title):
 
 
 def search_by_date(date):
-    list_result = []
-    search_result = search_news({"timestamp": {"$regex": date}})
     try:
         datetime.strptime(date, "%Y-%m-%d")
-
-        for news in search_result:
-            list_result.append((news["title"], news["url"]))
+        info = search_news({"timestamp": {"$regex": date}})
+        if info == []:
+            return []
+        list_result = []
+        for new in info:
+            list_result.append((new["title"], new["url"]))
+        return list_result
     except ValueError:
         raise ValueError("Data inválida")
-    else:
-        return list_result
 
 
 def search_by_source(source):
     list_result = []
-    search_result = search_news(
-        {"sources": {"$all": [re.compile(source, re.IGNORECASE)]}}
-    )
-
-    for news in search_result:
-        list_result.append((news["title"], news["url"]))
+    info = search_news({"sources": {"$regex": source, "$options": "i"}})
+    if info == []:
+        return []
+    for new in info:
+        list_result.append((new["title"], new["url"]))
     return list_result
 
 
 def search_by_category(category):
     list_result = []
-    search_result = search_news(
-        {"categories": {"$all": [re.compile(category, re.IGNORECASE)]}}
-    )
-
-    for news in search_result:
-        list_result.append((news["title"], news["url"]))
+    info = search_news({"categories": {"$regex": category, "$options": "i"}})
+    if info == []:
+        return []
+    for new in info:
+        list_result.append((new["title"], new["url"]))
     return list_result

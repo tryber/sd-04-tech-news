@@ -40,8 +40,8 @@ def scrape(fetcher, pages=1):
                         ".tec--toolbar__item::text"
                         ).re_first(r"[0-9]+"),
                     "comments_count": selector_url.css(
-                        "#js-comments-btn::text").re_first(r"[0-9]+"
-                        ),
+                        "#js-comments-btn::text"
+                        ).re_first(r"[0-9]+"),
                     "summary": selector_url.css(
                         ".tec--article__body *::text"
                         ).get(),

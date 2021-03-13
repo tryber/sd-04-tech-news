@@ -1,6 +1,7 @@
 import csv
 from tech_news.database import find_news
 
+
 def csv_exporter(filepath):
     if not filepath.endswith(".csv"):
         raise ValueError("Formato invalido")
@@ -17,4 +18,3 @@ def csv_exporter(filepath):
 
         writer.writerows(news)
         file.close()
-

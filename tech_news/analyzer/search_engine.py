@@ -1,3 +1,6 @@
+from tech_news import database
+import datetime
+
 def search_by_title(title):
     data = database.search_news({"title": {"$regex": title, "$options": "i"}})
     if data == []:

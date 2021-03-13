@@ -12,7 +12,9 @@ def fetch_content(url, timeout=3, delay=0.5):
     else:
         return response.text
 
+
 URL_BASE = "https://www.tecmundo.com.br/novidades"
+
 
 def scrape(fetcher, pages=1):
     news = []
@@ -27,16 +29,26 @@ def scrape(fetcher, pages=1):
                 {
                     "url": url,
                     "title": selector_url.css("#js-article-title::text").get(),
-                    "timestamp": selector_url.css(".tec--timestamp__item time::attr(datetime)").get(),
-                    "writer": selector_url.css(".tec--author__info__link::text").get(),
-                    "shares_count": selector_url.css(".tec--toolbar__item::text").re_first(r"[0-9]+"),
-                    "comments_count": selector_url.css("#js-comments-btn::text").re_first(r"[0-9]+"),
-                    "summary": selector_url.css(".tec--article__body *::text").get(),
+                    "timestamp": selector_url.css(
+                        ".tec--timestamp__item time::attr(datetime)"
+                        ).get(),
+                    "writer": selector_url.css(
+                        ".tec--author__info__link::text"
+                        ).get(),
+                    "shares_count": selector_url.css(
+                        ".tec--toolbar__item::text"
+                        ).re_first(r"[0-9]+"),
+                    "comments_count": selector_url.css(
+                        "#js-comments-btn::text").re_first(r"[0-9]+"
+                        ),
+                    "summary": selector_url.css(
+                        ".tec--article__body *::text"
+                        ).get(),
                     "sources": selector_url.css(".tec--badge::text").getall(),
-                    "categories": selector_url.css("#js-categories a::text").getall(),
+                    "categories": selector_url.css(
+                        "#js-categories a::text"
+                        ).getall(),
                 }
             )
-    count += 1 
+    count += 1
     return news
-
-

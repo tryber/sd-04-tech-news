@@ -13,7 +13,7 @@ def top_5_news():
                         }
                     }
                 },
-                {"$sort": {"popularity": -1, "title": 1}},
+                {"$sort": {"count": -1, "title": 1}},
                 {"$limit": 5},
             ]
         )
@@ -21,6 +21,7 @@ def top_5_news():
     client.close()
     for news in search_results:
         results.append((news["title"], news["url"]))
+
     return results
 
 
@@ -30,16 +31,14 @@ def top_5_categories():
         db.news.aggregate(
             [
                 {"$unwind": "$categories"},
-                {"$group": {
-                    "id": "$categories",
-                    "count": {"$sum": 1}
-                }},
                 {"$group": {"_id": "$categories", "count": {"$sum": 1}}},
                 {"$sort": {"count": -1, "_id": 1}},
+                {"$limit": 5},
             ]
         )
     )
     client.close()
     for news in search_results:
-        results.append(news["_id"])
+        results.append((news["_id"]))
+
     return results

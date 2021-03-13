@@ -45,6 +45,7 @@ def collector_menu(opt_input):
 
     if opt_input > 3:
         return
+
     param_input = input()
     functions = {
         1: csv_importer,
@@ -68,7 +69,8 @@ def analyzer_secondary_menu(opt_input):
     if opt_input > 7 or opt_input < 1:
         print(options[8], file=sys.stderr)
         return
-        print(options[opt_input])
+
+    print(options[opt_input])
 
 
 def analyzer_menu():
@@ -105,4 +107,5 @@ def analyzer_menu():
         result = functions[opt_input](param_input)
     else:
         result = functions[opt_input]()
+
     print(result)

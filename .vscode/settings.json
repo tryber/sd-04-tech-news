@@ -10,5 +10,5 @@
     ],
     "python.formatting.provider": "black",
     "python.linting.pylintEnabled": false,
-    "python.pythonPath": ".venv/bin/python"
+    "python.pythonPath": ".venv/bin/python3"
 }

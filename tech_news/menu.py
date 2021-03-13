@@ -28,7 +28,7 @@ def collector_secondary_menu(opt_input):
     print(options[opt_input])
 
 
-def collector_menu(opt_input):
+def collector_menu():
     print(
         """Selecione uma das opções a seguir:
         1 - Importar notícias a partir de um arquivo CSV;

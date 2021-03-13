@@ -15,7 +15,7 @@ def search_by_title(title):
 def search_by_date(date):
     try:
         datetime.datetime.strptime(date, "%Y-%m-%d")
-        data = search_news({"timestamp": {"$regex": date}})
+        data = database.search_news({"timestamp": {"$regex": date}})
         if data == []:
             return []
         news = []
@@ -27,7 +27,7 @@ def search_by_date(date):
 
 
 def search_by_source(source):
-    data = search_news({"sources": {"$regex": source, "$options": "i"}})
+    data = database.search_news({"sources": {"$regex": source, "$options": "i"}})
     if data == []:
         return []
     news = []
@@ -37,7 +37,7 @@ def search_by_source(source):
 
 
 def search_by_category(category):
-    data = search_news({"categories": {"$regex": category, "$options": "i"}})
+    data = database.search_news({"categories": {"$regex": category, "$options": "i"}})
     if data == []:
         return []
     news = []

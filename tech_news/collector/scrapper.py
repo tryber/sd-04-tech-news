@@ -2,6 +2,7 @@ import requests
 from time import sleep
 from parsel import Selector
 
+
 def fetch_content(url, timeout=3, delay=0.5):
     try:
         response = requests.get(url, timeout=timeout)
@@ -18,10 +19,10 @@ URL_BASE = "https://www.tecmundo.com.br/novidades"
 
 def scrape(fetcher, pages=1):
     news = []
-    count = 1 
+    count = 1
     while count <= pages:
         response = fetcher(URL_BASE + "?page={count}")
-        selector = Selector(text=response)  
+        selector = Selector(text=response)
 
         for url in selector.css(".tec--card__title a::attr(href)").getall():
             selector_url = Selector(text=fetcher(url))

@@ -29,7 +29,7 @@ def scrape(fetcher, pages=1):
             news.append(
                 {
                     "url": url,
-                    "title": selector_url.css("#js-article-title::text").get(),
+                    "title": selector_url.css(".tec--article__header__title::text").get(),
                     "timestamp": selector_url.css(
                         ".tec--timestamp__item time::attr(datetime)"
                         ).get(),
@@ -45,7 +45,7 @@ def scrape(fetcher, pages=1):
                     "summary": selector_url.css(
                         ".tec--article__body *::text"
                         ).get(),
-                    "sources": selector_url.css(".tec--badge::text").getall(),
+                    "sources": selector_url.css(".z--mb-16 a::text").getall(),
                     "categories": selector_url.css(
                         "#js-categories a::text"
                         ).getall(),

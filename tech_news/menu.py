@@ -13,29 +13,27 @@ import sys
 
 
 def collector_menu():
-    inputted_option = int(
-        input(
-            "Selecione uma das opções a seguir:\n"
-            " 1 - Importar notícias a partir de um arquivo CSV;\n"
-            " 2 - Exportar notícias para CSV;\n"
-            " 3 - Raspar notícias online;\n"
-            " 4 - Sair."
-        )
+    inputted_option = input(
+        "Selecione uma das opções a seguir:\n"
+        " 1 - Importar notícias a partir de um arquivo CSV;\n"
+        " 2 - Exportar notícias para CSV;\n"
+        " 3 - Raspar notícias online;\n"
+        " 4 - Sair."
     )
 
-    if inputted_option == 1 or inputted_option == 2:
+    if inputted_option == "1" or inputted_option == "2":
         csv_file_path = input("Insira o caminho do arquivo CSV: ")
-        if inputted_option == 1:
+        if inputted_option == "1":
             return create_news(csv_importer(csv_file_path))
         else:
             return csv_exporter(csv_file_path)
-    elif inputted_option == 3:
+    elif inputted_option == "3":
         number_of_pages = input("insira quantas páginas deseja raspar: ")
         scraped_data = scrape(
             fetcher=fetch_content, pages=int(number_of_pages)
         )
         return create_news(scraped_data)
-    elif inputted_option == 4:
+    elif inputted_option == "4":
         return print("Encerrando script")
     else:
         return print("Opção inválida", file=sys.stderr)

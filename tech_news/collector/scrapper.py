@@ -1,51 +1,68 @@
 import requests
-import time
+from time import sleep
 from parsel import Selector
 
 
 def fetch_content(url, timeout=3, delay=0.5):
     try:
+        print("fetching content", url)
         response = requests.get(url, timeout=timeout)
-        time.sleep(delay)
-    except requests.ReadTimeout:
+        sleep(delay)
+        response.raise_for_status()
+    except (requests.HTTPError, requests.ReadTimeout):
         return ""
-    if response.status_code == 200:
-        return response.text
     else:
-        return ""
+        return response.text
 
 
 def scrape(fetcher, pages=1):
     base_url = "https://www.tecmundo.com.br/novidades"
-    selector = Selector(fetcher(base_url))
-    items = selector.css(".tec--card__info h3 a::attr(href)").getall()
+    page_path = "?page="
+
     news = []
+    index = 1
+    while index <= pages:
+        content = fetcher(f"{base_url}{page_path}{index}")
+        selector = Selector(content)
+        items = selector.css(".tec--list__item")
+        for list_item in items:
+            url = list_item.css("h3 a::attr(href)").get()
+            details_content = fetcher(url)
+            details_selector = Selector(details_content)
+            title = details_selector.css("#js-article-title::text").get()
+            timestamp = details_selector.css(
+                ".tec--timestamp__item time::attr(datetime)"
+            ).get()
+            writer = details_selector.css(
+                ".tec--author__info__link::text"
+            ).get()
+            shares = details_selector.css("button::attr(data-count)").get()
+            comments = details_selector.css(
+                ".tec--btn::attr(data-count)"
+            ).getall()
+            summary = details_selector.css(
+                ".tec--article__body > p::text"
+            ).get()
+            sources = details_selector.css(".z--mb-16 > div a::text").getall()
+            categories = details_selector.css(
+                "#js-categories a::text"
+            ).getall()
 
-    for item in items:
-        content = fetcher(item)
-        selector = Selector(text=content)
-        title = selector.css("#js-article-title::text").get()
-        writer = selector.css(".tec--author__info__link::text").get()
-        shares_count = selector.css("button::attr(data-count)").get()
-        comments_count = selector.css(".tec--btn::attr(data-count)").get()
-        timestamp = selector.css(
-            ".tec--timestamp__item time::attr(datetime)"
-        ).get()
-        summary = selector.css(".tec--article__body > p::text").get()
-        sources = selector.css(".z--mb-16 > div a::text").getall()
-        categories = selector.css("#js-categories a::text").getall()
-
-        news.append(
-            {
-                "url": item,
+            notice = {
+                "url": url,
                 "title": title,
-                "timestamp": timestamp,
+                "timestamp": timestamp,  # "2020-07-09T11:00:00",
                 "writer": writer,
-                "shares_count": int(shares_count),
-                "comments_count": int(comments_count),
+                "shares_count": int(shares),
+                "comments_count": int(comments[0]),
                 "summary": summary,
                 "sources": sources,
                 "categories": categories,
             }
-        )
+
+            news.append(notice)
+
+        index += 1
+
+    print("news length", len(news))
     return news

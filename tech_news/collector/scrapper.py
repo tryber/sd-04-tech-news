@@ -8,6 +8,7 @@ def fetch_content(url, timeout=3, delay=0.5):
     try:
         response = requests.get(url, timeout=timeout)
         sleep(delay)
+        print(response.text)
     except (requests.exceptions.ReadTimeout):
         return " "
     else:

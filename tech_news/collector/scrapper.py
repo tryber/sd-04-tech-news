@@ -38,8 +38,6 @@ def scrape(url, selector):
         "sources": sources,
         "categories": categories,
     }
-   
-
 
 URL = "https://www.tecmundo.com.br/novidades"
 
@@ -52,7 +50,7 @@ def scrape(fetcher, pages=1):
         url_names = selector.css(
             "a.tec--list__item .tec--card__title__link::attr(href)"
             ).getall()
-        for urlPage in url_names:
+        for url in url_names:
             selector = Selector(fetcher(url))
             news.append(get_news_content(url, selector))
     return news

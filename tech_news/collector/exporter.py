@@ -1,5 +1,5 @@
 import csv
-
+from tech_news.database import find_news
 
 HEAD = [
     "url",

@@ -53,5 +53,5 @@ def scrape(fetcher, pages=1):
             ).getall()
         for url in url_names:
             selector = Selector(fetcher(url))
-            news.append(get_news_content(url, selector))
+            news.append(scrape(url, selector))
     return news

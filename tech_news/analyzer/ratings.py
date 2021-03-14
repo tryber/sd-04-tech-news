@@ -2,6 +2,7 @@ from tech_news.database import db
 from pymongo import ASCENDING, DESCENDING
 from bson.son import SON
 
+
 def top_5_news():
     data = (
         db.news.find({})

@@ -1,14 +1,31 @@
+from tech_news.database import search_news
+import datetime
+
+
+def general_search(field, query):
+    result = search_news({field: {"$regex": query, "$options": "i"}})
+    return [(news["title"], news["url"]) for news in result]
+
+
 def search_by_title(title):
-    """Seu código deve vir aqui"""
+    data = general_search("title", title)
+    if data == []:
+        return []
+    return data
 
 
 def search_by_date(date):
-    """Seu código deve vir aqui"""
+    try:
+        datetime.datetime.strptime(date, "%Y-%m-%d")
+        data = general_search("timestamp", date)
+        return data
+    except ValueError:
+        raise ValueError("Data inválida")
 
 
 def search_by_source(source):
-    """Seu código deve vir aqui"""
+    return general_search("sources", source)
 
 
 def search_by_category(category):
-    """Seu código deve vir aqui"""
+    return general_search("categories", category)

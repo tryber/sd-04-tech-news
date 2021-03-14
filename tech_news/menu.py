@@ -67,7 +67,7 @@ def analyzer_menu():
     if inputted_option > 0 and inputted_option < 5:
         inputted_value = input("Insira o valor")
         functions_by_option[inputted_option](inputted_value)
-    elif inputted_value < 8:
+    elif inputted_option < 8:
         functions_by_option[inputted_option]()
     else:
         print("Opção inválida", file=sys.stderr)

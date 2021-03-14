@@ -14,7 +14,7 @@ def fetch_content(url, timeout=3, delay=0.5):
         return response.text
 
 
-def scrape(url, selector):
+def news_content(url, selector):
     """Seu código deve vir aqui"""
     title = selector.css(".tec--article__header__title::text").get()
     timestamp = selector.css("#js-article-date::attr(datetime)").get()
@@ -42,7 +42,6 @@ def scrape(url, selector):
 
 URL = "https://www.tecmundo.com.br/novidades"
 
-
 def scrape(fetcher, pages=1):
     """Seu código deve vir aqui"""
     news = []
@@ -53,5 +52,5 @@ def scrape(fetcher, pages=1):
             ).getall()
         for url in url_names:
             selector = Selector(fetcher(url))
-            news.append(scrape(url, selector))
+            news.append(news_content(url, selector))
     return news

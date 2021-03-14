@@ -5,6 +5,7 @@ from time import sleep
 def fetch_content(url, timeout=3, delay=0.5):
     """Seu código deve vir aqui"""
     def fetch_content(url, timeout=3, delay=0.5):
+    try:
         response = requests.get(url, timeout=timeout)
         sleep(delay)
     except (requests.exceptions.ReadTimeout):

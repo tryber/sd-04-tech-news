@@ -17,7 +17,7 @@ def scrape(url, selector):
     """Seu código deve vir aqui"""
     title = selector.css(".tec--article__header__title::text").get()
     timestamp = selector.css("#js-article-date::attr(datetime)").get()
-    writer = selector.css(".tec--author__info__link::attr(href)").get()
+    writer = selector.css("a.tec--author__info__link::attr(href)").get()
     shares_count = selector.css("tec--toolbar__item::text").re_first(r'\d')
     if shares_count is None:
         shares_count = "0"
@@ -25,9 +25,9 @@ def scrape(url, selector):
     if comments_count is None:
         comments_count = "0"
     summary = selector.css(".tec--article__body > p::text").get()
-    sources = selector.css(".tec--badge::text").get()
+    sources = selector.css(".tec--badge::text").getall()
     categories = selector.css("#js-categories a::text").getall()
-    scrapes{
+    scrapes = {
         "url": url,
         "title": title,
         "timestamp": timestamp,

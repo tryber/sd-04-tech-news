@@ -33,7 +33,20 @@ def search_by_date(date):
 
 def search_by_source(source):
     """Seu código deve vir aqui"""
+    list_source = list(db.news.find({"sources": re.compile(source, re.IGNORECASE)}))
+    data = []
 
+    for x in lista_source:
+        data.append((x["title"], x["url"]))
+    return data
 
 def search_by_category(category):
     """Seu código deve vir aqui"""
+    lista_category = list(
+        db.news.find({"categories": re.compile(category, re.IGNORECASE)})
+    )
+    data = []
+
+    for x in lista_category:
+        data.append((x["title"], x["url"]))
+    return data

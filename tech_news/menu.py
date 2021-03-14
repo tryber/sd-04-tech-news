@@ -1,3 +1,6 @@
+from tech_news.collector.importer import csv_importer
+
+
 def collector_menu():
     entrada = input(
         "Selecione uma das opções a seguir:\n"
@@ -7,7 +10,7 @@ def collector_menu():
     )
 
     if entrada == "1":
-        pass
+        return csv_importer("correct.csv")
     elif entrada == "2":
         pass
     elif entrada == "3":

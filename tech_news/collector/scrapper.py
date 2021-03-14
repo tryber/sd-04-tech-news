@@ -10,7 +10,7 @@ def fetch_content(url, timeout=3, delay=0.5):
         sleep(delay)
         print(response.text)
     except (requests.exceptions.ReadTimeout):
-        return " "
+        return ""
     else:
         return response.text
 

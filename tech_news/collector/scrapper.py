@@ -40,6 +40,7 @@ def news_content(url, selector):
         "categories": categories,
     }
 
+
 URL = "https://www.tecmundo.com.br/novidades"
 
 

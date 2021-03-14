@@ -42,6 +42,7 @@ def news_content(url, selector):
 
 URL = "https://www.tecmundo.com.br/novidades"
 
+
 def scrape(fetcher, pages=1):
     """Seu código deve vir aqui"""
     news = []

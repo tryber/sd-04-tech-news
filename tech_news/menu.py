@@ -85,7 +85,7 @@ def analyzer_menu():
         7: option_7,
     }
 
-    if user_input > 0 and user_input < 7:
+    if user_input > 0 and user_input < 8:
         return options[user_input]()
     else:
         print("Opção inválida", file=sys.stderr)

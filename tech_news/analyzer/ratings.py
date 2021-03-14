@@ -11,7 +11,6 @@ def top_5_news():
                 ("shares_count", pymongo.DESCENDING),
                 ("comments_count", pymongo.DESCENDING),
                 ("title", pymongo.ASCENDING),
-            
             ]
         )
         .limit(5)

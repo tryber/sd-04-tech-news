@@ -27,7 +27,7 @@ def scrape(url, selector):
     summary = selector.css(".tec--article__body > p::text").get()
     sources = selector.css(".tec--badge::text").getall()
     categories = selector.css("#js-categories a::text").getall()
-    scrapes = {
+    return {
         "url": url,
         "title": title,
         "timestamp": timestamp,
@@ -38,7 +38,7 @@ def scrape(url, selector):
         "sources": sources,
         "categories": categories,
     }
-    return scrapes
+   
 
 
 URL = "https://www.tecmundo.com.br/novidades"

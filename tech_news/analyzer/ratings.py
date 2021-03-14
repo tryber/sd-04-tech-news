@@ -18,18 +18,6 @@ def top_5_news():
     return [(news["title"], news["url"]) for news in data]
 
 
-""" def top_5_categories():
-    data = search_aggregator(
-        [
-            {"$unwind": "$categories"},
-            {"$group": {"_id": "$categories", "total": {"$sum": 1}}},
-            {"$sort": {"total": -1, "_id": 1}},
-            {"$limit": 5},
-        ]
-    )
-    return [(news["title"], news["url"]) for news in data] """
-
-
 def top_5_categories():
     data = search_aggregator(
         [

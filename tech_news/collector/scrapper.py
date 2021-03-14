@@ -1,5 +1,6 @@
 import requests
 from time import sleep
+from parsel import Selector
 
 
 def fetch_content(url, timeout=3, delay=0.5):

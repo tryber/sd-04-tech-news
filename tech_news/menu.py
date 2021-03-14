@@ -21,10 +21,14 @@ def collector_menu():
             return csv_exporter(csv_file_path)
     elif inputed_value == "3":
         number_of_pages = input("insira quantas páginas deseja raspar: ")
-        scraped_data = scrape(fetcher=fetch_content, pages=int(number_of_pages))
+        scraped_data = scrape(
+            fetcher=fetch_content, pages=int(number_of_pages)
+        )
         return create_news(scraped_data)
     elif inputed_value == "4":
         return print("Script finalizado")
+    else:
+        print("Opção inválida")
 
 
 def analyzer_menu():

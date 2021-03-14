@@ -38,8 +38,31 @@ def collector_menu():
         print("Opção inválida", file=sys.stderr)
 
 
+# Tentativa de fazer um switch case
+
+
+def option_1():
+    return search_by_title(input("Digite o título:"))
+
+
+def option_2():
+    return search_by_date(input("Digite a data no formato aaaa-mm-dd:"))
+
+
+def option_3():
+    return search_by_source(input("Digite a fonte:"))
+
+
+def option_4():
+    return search_by_category(input("Digite a categoria:"))
+
+
+def option_7():
+    print("Encerrando script")
+
+
 def analyzer_menu():
-    user_input = input(
+    print(
         "Selecione uma das opções a seguir:\n"
         " 1 - Buscar notícias por título;\n"
         " 2 - Buscar notícias por data;\n"
@@ -50,23 +73,19 @@ def analyzer_menu():
         " 7 - Sair."
     )
 
-    if user_input == "1":
-        title = input("Digite o título:")
-        print(search_by_title(title))
-    elif user_input == "2":
-        date = input("Digite a data no formato aaaa-mm-dd:")
-        print(search_by_date(date))
-    elif user_input == "3":
-        source = input("Digite a fonte:")
-        print(search_by_source(source))
-    elif user_input == "4":
-        category = input("Digite a categoria:")
-        print(search_by_category(category))
-    elif user_input == "5":
-        print(top_5_news())
-    elif user_input == "6":
-        print(top_5_categories())
-    elif user_input == "7":
-        print("Encerrando script\n")
+    user_input = int(input())
+
+    options = {
+        1: option_1,
+        2: option_2,
+        3: option_3,
+        4: option_4,
+        5: top_5_news,
+        6: top_5_categories,
+        7: option_7,
+    }
+
+    if user_input > 0 and user_input < 7:
+        return options[user_input]()
     else:
         print("Opção inválida", file=sys.stderr)

@@ -1,4 +1,5 @@
 from ..database import search_news
+from datetime import datetime
 
 
 def serach_by_key(key, query):
@@ -11,7 +12,12 @@ def search_by_title(title):
 
 
 def search_by_date(date):
-    """Seu código deve vir aqui"""
+    try:
+        datetime.strptime(date, "%Y-%m-%d")
+    except ValueError:
+        raise ValueError("Data inválida")
+    else:
+        return serach_by_key("timestamp", date)
 
 
 def search_by_source(source):

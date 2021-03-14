@@ -1,35 +1,33 @@
-from tech_news.analyzer.search_engine import convert_to_tuples
-from tech_news.database import search_news_agrregations
+from bson.son import SON
+from tech_news.database import db
+import pymongo
 
 
 def top_5_news():
-    news = search_news_agrregations(
-        [
-            {
-                "$addFields": {
-                    "popularity": {
-                        "$add": ["$shares_count", "$comments_count"]
-                    }
-                }
-            },
-            {"$sort": {"popularity": -1, "title": 1}},
-            {"$limit": 5},
-        ]
+    data = (
+        db.news.find({}).sort([
+                ("shares_count", pymongo.DESCENDING),
+                ("comments_count", pymongo.DESCENDING),
+                ("title", pymongo.ASCENDING),
+            ]
+        ).limit(5)
     )
-    # print(news)
-    return convert_to_tuples(news)
+
+    news_data = []
+    for i in data:
+        news_data.append((i["title"], i["url"]))
+    return news_data
 
 
 def top_5_categories():
-    categories = []
-    data = search_news_agrregations(
-        [
-            {"$unwind": "$categories"},
-            {"$group": {"_id": "$categories", "count": {"$sum": 1}}},
-            {"$sort": {"count": -1, "_id": 1}},
-            {"$limit": 5},
-        ]
-    )
-    for news in data:
-        categories.append((news["_id"]))
-    return categories
+    data = db.news.aggregate([
+        {"$unwind": "$categories"},
+        {"$group": {"_id": "$categories", "count": {"$sum": 1}}},
+        {"$sort": SON([("count", 1), ("_id", 1)])},
+        {"$limit": 5},
+    ])
+    news_data = []
+    for i in data:
+        news_data.append((i["_id"]))
+
+    return news_data

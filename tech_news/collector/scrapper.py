@@ -50,7 +50,7 @@ def scrape(fetcher, pages=1):
     for page in range(1, pages + 1):
         selector = Selector(fetcher(f'{URL}?page={page}'))
         url_names = selector.css(
-            "a.tec--list__item .tec--card__title__link::attr(href)"
+            ".tec--list__item .tec--card__title__link::attr(href)"
             ).getall()
         for url in url_names:
             selector = Selector(fetcher(url))

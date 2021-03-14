@@ -13,7 +13,7 @@ def fetch_content(url, timeout=3, delay=0.5):
         return response.text
 
 
-def scrape(urlPage, selector):
+def scrape(url, selector):
     """Seu código deve vir aqui"""
     title = selector.css(".tec--article__header__title::text").get()
     timestamp = selector.css("#js-article-date::attr(datetime)").get()
@@ -28,7 +28,7 @@ def scrape(urlPage, selector):
     sources = selector.css(".tec--badge::text").get()
     categories = selector.css("#js-categories a::text").getall()
     scrapes{
-        "url": urlPage,
+        "url": url,
         "title": title,
         "timestamp": timestamp,
         "writer": writer,
@@ -53,6 +53,6 @@ def scrape(fetcher, pages=1):
             "a.tec--list__item .tec--card__title__link::attr(href)"
             ).getall()
         for urlPage in url_names:
-            selector = Selector(fetcher(urlPage))
-            news.append(get_news_content(urlPage, selector))
+            selector = Selector(fetcher(url))
+            news.append(get_news_content(url, selector))
     return news

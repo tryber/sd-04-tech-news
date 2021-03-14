@@ -9,6 +9,7 @@ from tech_news.analyzer.search_engine import (
     search_by_source,
     search_by_title,
 )
+import sys
 
 
 def collector_menu():
@@ -35,9 +36,9 @@ def collector_menu():
         )
         return create_news(scraped_data)
     elif inputted_option == 4:
-        return print("Script finalizado")
+        return print("Encerrando script")
     else:
-        return print("Opção inválida")
+        return print("Opção inválida", file=sys.stderr)
 
 
 functions_by_option = {
@@ -47,7 +48,7 @@ functions_by_option = {
     4: lambda category: print(search_by_category(category)),
     5: lambda: print(top_5_news()),
     6: lambda: print(top_5_categories()),
-    7: lambda: print("Script finalizado"),
+    7: lambda: print("Encerrando script"),
 }
 
 
@@ -71,4 +72,4 @@ def analyzer_menu():
     elif inputted_value < 8:
         functions_by_option[inputted_option]()
     else:
-        print("Opção inválida")
+        print("Opção inválida", file=sys.stderr)
